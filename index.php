@@ -14,7 +14,6 @@
     /* This is a
     multilines
     comments
-
     */
     ?>.
 </p>
