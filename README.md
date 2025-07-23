@@ -214,3 +214,67 @@ There are two main types:
   ```
 
 Comments are essential for keeping your code organized and understandable as your projects grow\!
+
+---
+
+Let's talk about something you'll definitely encounter as you build websites: errors\!
+
+-----
+
+## Chapter 4 : Navigating the Road Ahead: Unveiling PHP Errors 🚦
+
+As you begin your journey of writing PHP code, it's crucial to understand how PHP handles "bumps in the road" – what we call **errors**. By default, if your PHP code has a problem, your web page might just show up as a blank screen. This makes it really tough to figure out what went wrong\!
+
+To make your life as a developer much easier, we need to tell PHP to be more transparent and **display these errors** directly in your web browser. This helps you quickly pinpoint and fix issues.
+
+### Configuring PHP to Show Errors 🛠️
+
+PHP is highly customizable, and we can change its behavior through a special file called **`php.ini`**.
+
+**Why doesn't PHP show errors by default?**
+It's a security measure\! On a live website, you generally don't want to show detailed error messages to users, as this could give away too much information about your application's inner workings. But for development, it's essential.
+
+#### Locating the `php.ini` File 🔍
+
+To find this important configuration file, we'll use a special PHP command called **`phpinfo()`**.
+
+1.  **Create a new PHP file** (e.g., `info.php`) in your XAMPP `htdocs` folder.
+2.  **Add this single line of code:**
+    ```php
+    <?php phpinfo(); ?>
+    ```
+3.  **Save the file.**
+4.  **Open your web browser** and go to `http://localhost/info.php`.
+
+This page will display a ton of information about your PHP setup. Look for the line that says **"Loaded Configuration File"**. This line will tell you the exact location of your `php.ini` file.
+
+#### Modifying the `php.ini` File ✏️
+
+Once you've found `php.ini`, open it with your text editor (like Visual Studio Code). We need to change two important settings:
+
+1.  **`error_reporting`**: Find this setting and make sure it's set to **`E_ALL`**. This tells PHP to report all types of errors.
+2.  **`display_errors`**: Find this setting and change its value to **`On`**. This tells PHP to display those errors directly on your web page.
+
+**Important:** If either of these lines starts with a semicolon (`;`), remove it\! A semicolon at the beginning of a line means it's a "comment" and ignored by PHP. Also, ensure these lines only appear once in the file.
+
+After making these changes, **save the `php.ini` file.**
+
+### Restart Your Server\! 🔄
+
+For your changes to take effect, you must **restart your web server**. The easiest way is to stop and then start Apache (and MySQL, if you're using it) again from your XAMPP control panel.
+
+### Testing Error Display 🐛
+
+Let's confirm it works\!
+
+1.  Go back to your `info.php` file (or create a new test file).
+2.  **Intentionally create an error.** For example, remove a parenthesis from the `phpinfo()` line, so it looks like this:
+    ```php
+    <?php phpinfo(; ?>
+    ```
+3.  **Save the file.**
+4.  **Open it in your browser** (`http://localhost/info.php`).
+
+Instead of a blank page, you should now see a detailed error message\!  This is a good thing – it means PHP is now configured to help you troubleshoot your code effectively.
+
+By enabling error display, you've equipped yourself with a vital tool for understanding and fixing issues as you continue your PHP learning journey\!

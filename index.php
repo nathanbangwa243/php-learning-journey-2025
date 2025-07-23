@@ -10,7 +10,6 @@
     <?php
     // This code displays the current time
     echo date('d/m/Y h:i:s');
-
     /* This is a
     multilines
     comments
