@@ -101,6 +101,116 @@ For writing your code, a specialized editor is key:
 * **Visual Studio Code (VS Code):** Recommended for beginners, it's fast, lightweight, and offers features like **code coloring** and line numbers.
 * **PHPStorm:** A powerful, professional-grade tool for larger projects, though it's paid.
 
-
-
 With XAMPP running and your code editor ready, your computer is now prepared for building dynamic PHP websites!
+
+---
+
+## Chapter 3 : Your First PHP Script: Adding Dynamic Flair to Your Web Page ✨
+
+Now that we know how PHP works behind the scenes, it's time to get hands-on and create your first PHP-powered web page\! Don't expect anything fancy yet; this is about understanding how to weave PHP into your familiar HTML structure.
+
+Let's write our very first PHP script\!
+
+### Speaking PHP with Special Tags 🏷️
+
+You're already used to **HTML tags** like `<ul>` that define the structure of your web content. PHP code works similarly: it sits inside special tags within your HTML. These PHP code snippets are the "dynamic" parts of your page – the sections that can change automatically.
+
+Imagine a simple HTML page:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>My Web Page</title>
+    </head>
+    <body>
+        <h1>My Web Page</h1>
+        <p>Hello !</p>
+    </body>
+</html>
+```
+
+To insert dynamic content, like a visitor's name, we use specific PHP tags.
+
+#### The PHP "Boundary": `<?php ?>`
+
+The standard way to tell the server "Hey, this is PHP code\!" is by enclosing it within:
+
+* It **starts** with `<?php`
+* It **ends** with `?>`
+
+Everything inside these tags is PHP code. You can write simple one-line commands or complex multi-line instructions. While other variations exist (like `<? ?>`), **`<?php ?>` is the most correct and recommended form.**
+
+You can place these PHP tags almost anywhere in your HTML code: in the head, in the body, or even partially inside another HTML tag (though that's usually not the prettiest approach).
+
+### Making PHP "Speak": The `echo` Instruction 💬
+
+Okay, enough theory\! Let's make PHP do something. Your first PHP instruction is `echo`.
+
+In programming, an **"instruction"** is a command you give the computer to perform a specific action. In PHP, most instructions end with a **semicolon (`;`)**.
+
+The `echo` instruction simply tells PHP to **display text** on the web page.
+
+```php
+<?php echo "This is some text."; ?>
+```
+
+Or, you can include HTML tags within the text:
+
+```php
+<?php echo "This is <strong>bold text</strong>."; ?>
+```
+
+This will make "bold text" appear bold on your webpage. If you need to display a double quote within your text, you "escape" it with a backslash `\"` to tell PHP it's part of the text, not the end of your instruction.
+
+### Saving and Testing Your PHP Page ▶️
+
+Unlike plain HTML files, PHP files must have the **`.php` extension** (e.g., `displaytext.php`). You must save these files in your XAMPP's `htdocs` folder (or a subfolder within it).
+
+1.  **Start XAMPP:** Ensure Apache and MySQL are running.
+2.  **Navigate:** Open your web browser and go to `http://localhost/your-folder/your-file.php`. For instance, `http://localhost/tests/displaytext.php`.
+
+You'll see the page appear. What's special? Look at the page's source code in your browser. You'll notice that the PHP code itself is gone\! PHP executed on the server, generated HTML, and only that HTML was sent to your browser. This demonstrates how PHP builds dynamic content.
+
+**Fun Test:** Try this code:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>My Dynamic Page</title>
+    </head>
+    <body>
+        <h1>My Dynamic Page</h1>
+        <p>Today is <?php echo date('d/m/Y h:i:s'); ?>.</p>
+    </body>
+</html>
+```
+
+Save it as `dynamic_date.php`, view it in your browser, and then refresh after a minute. Notice how the date and time automatically update? That's PHP in action\!
+
+### Commenting Your Code: Notes for Yourself (and Others) 📝
+
+As you write more complex code, you'll appreciate **comments**. These are notes you write within your code that the server completely ignores. They're just for you (or other developers) to understand what your code does, why you wrote it a certain way, or to clarify complex sections.
+
+There are two main types:
+
+* **Single-line comments:** Start with `//`. Everything after `//` on that line is a comment.
+  ```php
+  <?php
+  echo "Hello!"; // This displays a greeting
+  ?>
+  ```
+* **Multi-line comments:** Start with `/*` and end with `*/`. Anything between these is a comment, even across multiple lines.
+  ```php
+  <?php
+  /* This is a comment
+     that spans
+     multiple lines. */
+  echo "Another line.";
+  ?>
+  ```
+
+Comments are essential for keeping your code organized and understandable as your projects grow\!
