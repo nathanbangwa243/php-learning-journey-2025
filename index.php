@@ -1,36 +1,38 @@
+<?php
+
+$recipes = [
+    [
+        'title' => 'Cassoulet',
+        'author' => 'mickael.andrieu@exemple.com',
+    ],
+    [
+        'title' => 'Couscous',
+        'author' => 'mickael.andrieu@exemple.com',
+    ],
+    [
+        'title' => 'Escalope milanaise',
+        'author' => 'mathieu.nebra@exemple.com',
+    ],
+    [
+        'title' => 'Salade Romaine',
+        'author' => 'laurene.castor@exemple.com',
+    ],
+];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Ma page web</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage des recettes</title>
 </head>
 <body>
-<h1>Ma page web</h1>
-<p>
-    <?php
-    $username = "nathan";
-    $isAllowToEnter = 4;
-
-    switch ($isAllowToEnter){
-        case 2:
-            echo "Welcome {$username}";
-        break;
-
-        case 3:
-            echo "Access denied for user '{$username}'";
-        break;
-        default:
-            echo "You're amazing";
-    }
-
-    # check user majority
-    $user_age = 17;
-
-    $is_major = ($user_age >= 18) ? true:false;
-
-    echo $is_major ? "{$username} is major" : "{$username} is minor";
-
-    ?>
-</p>
+<ul>
+    <?php for ($lines = 0; $lines <= 3; $lines++) : ?>
+        <li><?php echo $recipes[$lines]['title'] . ' (' . $recipes[$lines]['author'] . ')'; ?></li>
+    <?php endfor; ?>
+</ul>
 </body>
 </html>
