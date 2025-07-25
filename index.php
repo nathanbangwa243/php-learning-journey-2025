@@ -10,6 +10,11 @@
     <?php
     // This code displays the current time
     echo date('d/m/Y h:i:s');
+
+    // Variable
+    $name = "Nathan Bangwa";
+
+    echo 'My full name is '. $name .' and Im glad to be here';
     /* This is a
     multilines
     comments

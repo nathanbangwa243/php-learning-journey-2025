@@ -278,3 +278,108 @@ Let's confirm it works\!
 Instead of a blank page, you should now see a detailed error message\!  This is a good thing – it means PHP is now configured to help you troubleshoot your code effectively.
 
 By enabling error display, you've equipped yourself with a vital tool for understanding and fixing issues as you continue your PHP learning journey\!
+
+---
+
+## Chapter 5 : Your Project's Building Blocks: Working with Variables in PHP 🧱
+
+Alright, let's dive into the core of programming: **variables**\! This is where we start building our recipe-sharing website.
+
+We're moving into the practical side of PHP, starting with a fundamental concept: **variables**. Think of variables as temporary storage containers for pieces of information that your website needs to remember while it's being built.
+
+For our recipe website, we'll need to keep track of various "business objects":
+
+* **Users:** They'll have details like names, emails, passwords, and ages.
+* **Recipes:** They'll have a title, ingredients, instructions, and an activation status.
+* ...and so on for every piece of information that makes up your project.
+
+### What Exactly Is a Variable? 📦
+
+A **variable** is simply a small piece of data held in your computer's memory for a short time. In PHP, a variable exists only while the specific web page is being generated. Once the page is fully built and sent to the user, these temporary variables disappear. They aren't saved to your hard drive like a permanent file; they're just fleeting bits of information in the computer's active memory (RAM).
+
+You create variables whenever you need to store information. Each variable has two key parts:
+
+1.  **A Name:** This is how you identify and call the variable. For example, `userAge`.
+2.  **A Value:** This is the actual information it holds, like `17`.
+
+You can change a variable's value whenever you need to, perform calculations with it, and retrieve its value by calling its name.
+
+### Different Kinds of Information: Data Types 📊
+
+Variables can hold different *types* of information, called **data types**. Here are the main ones you'll use:
+
+* **Strings (text):** This is what we call text in programming, like `"Hello"` or `'Mathieu Nebra'`. You enclose text in either double quotes (`" "`) or single quotes (`' '`).
+* **Integers (whole numbers):** These are numbers without decimals, like `1`, `17`, or `-5`.
+* **Floats (decimal numbers):** These are numbers with a decimal point, like `14.738`. (Remember to use a `.` for decimals, not a `,`).
+* **Booleans (true/false):** This is a very important type for storing simple `true` or `false` values, often used for decisions. You write `true` or `false` directly, without quotes.
+* **NULL (nothing):** Sometimes, you need to say a variable contains absolutely nothing. You use the keyword `NULL` for this.
+
+### Giving a Variable a Value (Assignment) ➡️
+
+In PHP, every variable name starts with a **dollar sign (`$`)**. Then comes the name you choose (no spaces, often using `camelCase` like `userAge`), followed by an **equals sign (`=`)**, and then the value you want to store. Don't forget the **semicolon (`;`)** at the end of the line\!
+
+```php
+<?php
+$userAge = 17; // We create a variable named $userAge and give it the value 17
+?>
+```
+
+**Important:** Just creating a variable doesn't make anything appear on the web page. It only stores the information in memory. To display it, you still use the `echo` instruction.
+
+```php
+<?php
+$fullname = 'Mathieu Nebra';
+echo $fullname; // This will display "Mathieu Nebra" on the page
+?>
+```
+
+Notice we don't use quotes around `$fullname` when we `echo` it; we're telling PHP to display the *value* of the variable.
+
+### Combining Text and Variables (Concatenation) 🔗
+
+Often, you'll want to combine static text with the dynamic content from your variables, like "Welcome Mathieu Nebra\!" This is called **concatenation** (or "assembling").
+
+PHP offers two main ways to do this:
+
+1.  **Using Double Quotes (`" "`):** With double quotes, PHP is smart enough to look inside the string for variable names (starting with `$`) and automatically replace them with their values. This is called **interpolation**.
+
+    ```php
+    <?php
+    $fullname = "Mathieu Nebra";
+    echo "Hello {$fullname} and welcome to the site!"; // Displays "Hello Mathieu Nebra and welcome to the site!"
+    ?>
+    ```
+
+    (Using `{}` around the variable in double quotes is a good habit to avoid confusion if there are numbers or other characters immediately following the variable name.)
+
+2.  **Using Single Quotes (`' '`) with the Dot Operator (`.`):** With single quotes, PHP treats everything literally. To combine text and variables, you use a **dot (`.`)** as the concatenation operator.
+
+    ```php
+    <?php
+    $fullname = 'Mathieu Nebra';
+    echo 'Hello ' . $fullname . ' and welcome to the site!'; // Displays "Hello Mathieu Nebra and welcome to the site!"
+    ?>
+    ```
+
+    Choose the method that makes your code clearest and easiest to read.
+
+### Simple Math with Variables ➗
+
+PHP can also perform basic calculations\! You'll use familiar symbols for addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), and the **modulo (`%`)** operator (which gives you the remainder of a division).
+
+```php
+<?php
+$number = 2 + 4;       // $number becomes 6
+$totalCost = 3 * 5;    // $totalCost becomes 15
+$remainder = 10 % 3;   // $remainder becomes 1 (because 10 divided by 3 is 3 with 1 left over)
+
+$initialValue = 10;
+$finalResult = ($initialValue + 5) * $initialValue; // $finalResult becomes (10 + 5) * 10 = 150
+?>
+```
+
+You can combine numbers and variables in these calculations. PHP follows standard math rules (like operations inside parentheses first).
+
+-----
+
+Now that you know how to work with variables – storing, retrieving, combining, and calculating with information – you're ready to start building more interactive parts of your dynamic website\!
