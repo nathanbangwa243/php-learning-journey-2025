@@ -6,20 +6,31 @@
 </head>
 <body>
 <h1>Ma page web</h1>
-<p>Aujourd'hui nous sommes le
+<p>
     <?php
-    // This code displays the current time
-    echo date('d/m/Y h:i:s');
+    $username = "nathan";
+    $isAllowToEnter = 4;
 
-    // Variable
-    $name = "Nathan Bangwa";
+    switch ($isAllowToEnter){
+        case 2:
+            echo "Welcome {$username}";
+        break;
 
-    echo 'My full name is '. $name .' and Im glad to be here';
-    /* This is a
-    multilines
-    comments
-    */
-    ?>.
+        case 3:
+            echo "Access denied for user '{$username}'";
+        break;
+        default:
+            echo "You're amazing";
+    }
+
+    # check user majority
+    $user_age = 17;
+
+    $is_major = ($user_age >= 18) ? true:false;
+
+    echo $is_major ? "{$username} is major" : "{$username} is minor";
+
+    ?>
 </p>
 </body>
 </html>
