@@ -800,6 +800,68 @@ When an error appears:
 
 Debugging is a crucial skill. It's an inevitable part of coding, so don't get discouraged! With practice, you'll become much quicker at identifying and fixing these issues.
 
----
-
 Now that you're prepared to tackle common PHP errors, we're almost ready to bring everything together. Next, we'll look at how to organize your site's pages into functional blocks.
+
+-----
+
+## Chapter 11 : Building Modular Websites: Organizing Pages with PHP Includes 🧱
+
+Let's break down how to organize your website into manageable, reusable blocks using PHP's include feature.
+
+So far, we've mostly worked on a single page, but real websites have many. Imagine having to copy and paste your website's navigation menu onto dozens of different pages. If you ever wanted to change one link, you'd have to edit every single file\! That's where **PHP's page inclusion feature** comes in handy. It's one of the simplest yet most powerful ways PHP helps you build websites.
+
+### Thinking in Functional Blocks 🧩
+
+Most websites follow a common layout: a header (with a logo or title), a navigation menu, the main content area, and a footer (with copyright info).
+
+Instead of copying the HTML for the header, menu, and footer on every page, PHP lets you design your website in "functional blocks." You can create separate `.php` files for each common part:
+
+* `header.php`: Contains the HTML for your website's header and navigation menu.
+* `footer.php`: Contains the HTML for your website's footer.
+* `variables.php`: Holds common data (like your lists of users and recipes).
+* `functions.php`: Stores all your custom PHP functions.
+
+### Including Pages with `require_once()` 🤝
+
+Once you've created these separate files, you can "include" them into your main pages (like `index.php` or `contact.php`) using the `require_once()` instruction.
+
+```php
+<?php require_once(__DIR__ . '/header.php'); ?>
+```
+
+When PHP processes your `index.php` file, it sees this line and effectively copies and pastes the entire content of `header.php` right there. The visitor's browser only receives one complete HTML page, but for you, the developer, your code is clean and organized.
+
+* **`__DIR__`**: This is a special PHP constant that tells `require_once` the exact location of your current file. This makes your code more robust because it always finds the correct path to the included files, no matter where your main script is run from.
+
+**Benefits of this approach:**
+
+* **No more repeated code:** Update your menu or footer in one place, and the changes instantly appear across your entire site.
+* **Easier maintenance:** When a bug or change is needed, you know exactly which small file to modify.
+* **Better organization:** Your project becomes structured and easier to understand.
+
+### Building Our Recipe Site with Includes 🏗️
+
+Applying this to our recipe site:
+
+1.  We'll create `variables.php` to hold our `$users` and `$recipes` arrays.
+
+2.  We'll create `functions.php` to store our `displayAuthor()`, `isValidRecipe()`, and `getRecipes()` functions.
+
+3.  We'll design `header.php` and `footer.php` with the common HTML structure.
+
+4.  Then, in our main pages like `index.php` and `contact.php`, we'll start by including these files at the top:
+
+    ```php
+    <?php
+    require_once(__DIR__ . '/variables.php');
+    require_once(__DIR__ . '/functions.php');
+    require_once(__DIR__ . '/header.php');
+    ?>
+    <?php require_once(__DIR__ . '/footer.php'); ?>
+    ```
+
+This modular approach is a cornerstone of modern web development, significantly simplifying how you build and manage multi-page websites.
+
+-----
+
+With your site now organized into functional blocks, how will you leverage this structure to expand your recipe application with more pages and features?
