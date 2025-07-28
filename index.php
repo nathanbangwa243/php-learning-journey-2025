@@ -86,6 +86,7 @@ function displayAuthor(array $users, array $recipe) {
             rel="stylesheet"
     >
 </head>
+
 <body>
 <div class="container">
     <h1>Affichage des recettes</h1>
