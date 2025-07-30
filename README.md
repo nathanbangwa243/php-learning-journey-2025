@@ -1023,6 +1023,82 @@ To protect against XSS and other vulnerabilities, you must always process user i
 
 By diligently checking for expected parameters, validating their content, and escaping HTML, you can process form submissions securely, ensuring your website remains safe and reliable for all users.
 
+With the knowledge of securely handling form data, you're ready to build robust and trustworthy interactive features for your website. What kind of user interactions are you eager to implement with this newfound security in mind?
+
 -----
 
-With the knowledge of securely handling form data, you're ready to build robust and trustworthy interactive features for your website. What kind of user interactions are you eager to implement with this newfound security in mind?
+## Chapter 14 : Enabling File Sharing: Handling User Uploads 📥
+
+Let's learn how to let users send files through your website's forms, like sharing a screenshot to help you fix an issue.
+
+To allow users to send files, you'll update your contact form and PHP code. Just as we use `$_GET` and `$_POST` for text data, PHP has a special built-in variable called **`$_FILES`** specifically for file uploads.
+
+### Setting Up Your Form for File Uploads ⚙️
+
+First, you need to tell your HTML form that it will be handling files. Add the attribute `enctype="multipart/form-data"` to your `<form>` tag:
+
+```html
+<form action="submit_contact.php" method="POST" enctype="multipart/form-data">
+    <input type="file" name="screenshot" />
+    <button type="submit">Send</button>
+</form>
+```
+
+The `<input type="file" name="screenshot" />` element creates the "Choose File" button for users. The `name` attribute (here, "screenshot") is crucial because it's how PHP will identify this uploaded file.
+
+### Processing the Upload in PHP 👩‍💻
+
+When a user submits the form, the file is temporarily stored on your server. It's your PHP script's job to decide whether to accept and permanently save it. The **`$_FILES['screenshot']`** variable (using the `name` from your input field) is an array containing important details about the uploaded file:
+
+* **`['name']`**: The original name of the file.
+* **`['type']`**: The file's format (e.g., `image/png`).
+* **`['size']`**: The file's size in bytes.
+* **`['tmp_name']`**: The temporary location where PHP stored the file.
+* **`['error']`**: A code indicating if any errors occurred during the upload (0 means no error).
+
+**Before saving the file permanently, you must perform several checks for security and integrity:**
+
+1.  **Verify successful upload**:
+    Make sure the `$_FILES['screenshot']` variable exists and that `$_FILES['screenshot']['error']` is `0`.
+
+2.  **Check file size**:
+    Compare `$_FILES['screenshot']['size']` against a maximum allowed size (e.g., 1,000,000 bytes for 1MB). This prevents users from uploading extremely large files that could overwhelm your server.
+
+3.  **Validate file extension**:
+    Extract the file's extension using `pathinfo($_FILES['screenshot']['name'])['extension']`. Then, compare it against a list of allowed extensions (e.g., `['jpg', 'jpeg', 'gif', 'png']`). **Crucially, never allow users to upload PHP files or other executable scripts**, as they could then run malicious code on your server.
+
+4.  **Confirm destination folder**:
+    Check if your target upload directory (e.g., `/uploads/`) exists using `is_dir()` and has the necessary permissions for PHP to write to it.
+
+**Finally, if all checks pass, move the file to its permanent location:**
+
+```php
+<?php
+// Example simplified code
+if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] === 0) {
+    // Perform size, extension, and directory checks here (as described above)
+
+    // If all checks pass:
+    $target_directory = __DIR__ . '/uploads/';
+    $final_file_name = basename($_FILES['screenshot']['name']); // Gets just the file name
+    $destination_path = $target_directory . $final_file_name;
+
+    if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $destination_path)) {
+        echo "File uploaded successfully!";
+    } else {
+        echo "Error moving file.";
+    }
+} else {
+    echo "No file uploaded or an error occurred.";
+}
+?>
+```
+
+The `move_uploaded_file()` function takes the temporary file path and the desired final destination.
+
+**Important Considerations:**
+
+* You might want to generate unique names for uploaded files (instead of using their original names) to prevent overwriting or security issues if users upload files with the same name.
+* Ensure your upload directory has the correct **write permissions** set on your server (often referred to as CHMOD settings, like 733).
+
+By implementing these checks, you can safely allow users to upload files to your website, making your forms more versatile and helpful while maintaining security.
