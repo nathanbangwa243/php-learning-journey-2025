@@ -1102,3 +1102,60 @@ The `move_uploaded_file()` function takes the temporary file path and the desire
 * Ensure your upload directory has the correct **write permissions** set on your server (often referred to as CHMOD settings, like 733).
 
 By implementing these checks, you can safely allow users to upload files to your website, making your forms more versatile and helpful while maintaining security.
+
+-----
+
+## Chapter 15 : Building a Login System: Securing Your Content 🔒
+
+Let's dive into creating a simple login system for your website, protecting specific content with a password.
+
+You now have enough PHP knowledge to implement a basic login system\! The goal is to allow users to sign in with an email and password, display a welcome message upon successful login, and crucially, only show your recipe list to logged-in users.
+
+### Planning Your Login Logic 🗺️
+
+Before writing any code, it's a good practice to sketch out the process:
+
+1.  **The Goal:** Build a login form, validate user credentials, display success/error messages, and conditionally show content (like recipes).
+2.  **Flow Diagram:**
+    * **Not Logged In:** Show the login form, hide the recipes.
+    * **Correct Credentials:** Hide the login form, display a welcome message, show the recipes.
+    * **Incorrect Credentials:** Show an error message, display the login form again, hide the recipes.
+3.  **Required Tools:** You'll need to use what you've already learned: `echo` for output, **variables**, **forms** (sending data via `POST`), **conditional statements** (`if/else`), and **file inclusions** (`require_once`).
+
+### Crafting the Login Pages 🧑‍💻
+
+You'll primarily work with two files:
+
+1.  **`login.php` (The Login Form and Processing Logic):**
+
+    * This file will contain the HTML for your login form, with input fields for email (`type="email"`) and password (`type="password"`). It will submit data using the `POST` method.
+    * It will also house the PHP code to process the form submission:
+        * It captures the submitted data using the **`$_POST`** superglobal.
+        * It **validates** the email format using `filter_var()`.
+        * It then checks if the submitted email and password **match** any user in your pre-defined `$users` list (which would typically be stored in `variables.php`).
+        * If a match is found, it "identifies" the user. If not, it sets an `errorMessage`.
+        * Crucially, this `login.php` file will contain an `if` condition to either display the login form (along with any error messages) if the user isn't identified, or a success message if they are.
+
+2.  **`index.php` (The Main Page with Conditional Content):**
+
+    * This is your main recipe display page.
+    * It will `require_once` your `variables.php`, `functions.php`, and `header.php`.
+    * Crucially, it will *also* `require_once` your **`login.php`**. This means the login form (or success/error message) from `login.php` will appear directly on your `index.php` page.
+    * Finally, the recipe list display will be wrapped in an **`if` condition** that only executes *if* a user has been successfully `loggedUser` (i.e., the `$loggedUser` variable is set by `login.php`).
+
+    <!-- end list -->
+
+    ```php
+    <?php if (isset($loggedUser)) : ?>
+        <?php endif; ?>
+    ```
+
+### Important Security Note ⚠️
+
+While this system works, remember that in this basic setup, you're directly comparing the submitted password to a stored password. In real-world applications, **passwords should never be stored or compared directly**. Instead, they should be "hashed" (transformed into an unreadable string) to protect them even if your database is compromised. However, for this course, direct comparison illustrates the login logic.
+
+This initial login system provides a solid foundation for controlling access to different parts of your website. While the login status won't "remember" the user if they navigate away or close the browser (that's for future chapters\!), it successfully demonstrates how to gate content based on user input.
+
+-----
+
+With this login system in place, you can now start imagining more advanced features for your recipe site, like personalized dashboards or content submission. What's the first protected content you'll add?
