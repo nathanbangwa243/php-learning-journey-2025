@@ -1,5 +1,8 @@
+
+
 <?php
 
+session_start();
 /**
  * On ne traite pas les super globales provenant de l'utilisateur directement,
  * ces données doivent être testées et vérifiées.
