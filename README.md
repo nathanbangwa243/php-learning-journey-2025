@@ -1264,3 +1264,33 @@ To understand a database, think of it as a set of nested containers:
 * **Entry**: These are the rows in a table. Each entry is a single record, like one specific user's complete information.
 
 This structured approach makes it incredibly easy to store, find, and manage large amounts of data. You'll create tables for your website's users, recipes, and comments, which will become the foundation for a dynamic and interactive site. While MySQL stores this data in physical files on your server, you should never touch these files directly; you should always communicate with MySQL using SQL commands.
+
+-----
+
+Now that you know what a database is, let's look at how to build one. While you can communicate with a database using code, it's often easier to use a visual tool. We'll use **phpMyAdmin**, which is a popular browser-based tool for managing MySQL databases.
+
+---
+
+### Chapter 18 : Building Your Database with phpMyAdmin 🏗️
+
+Inside phpMyAdmin, you'll create **tables** to hold your data. A table is like a spreadsheet, and each column in that table is called a **field**. When creating a table for something like recipes, you need to define a field for each piece of information, such as the recipe title or the recipe content.
+
+For each field, you'll also assign a **data type**. While PHP has a few data types, MySQL has many. You'll primarily rely on these four:
+
+* `INT`: For whole numbers.
+* `VARCHAR`: For short text strings (up to 255 characters).
+* `TEXT`: For long text, like an entire recipe or a book.
+* `DATE`: For storing a date.
+
+Every table needs a **primary key**. This is a field that uniquely identifies each entry (or row) in the table. The standard practice is to create a field called `id`, mark it as the **PRIMARY** key, and enable the `AUTO_INCREMENT` option. This tells MySQL to automatically assign a new, unique number to each new entry, saving you the trouble of doing it yourself.
+
+### Importing and Exporting Data 💾
+
+phpMyAdmin also makes it easy to move data around.
+
+* The **Import** feature lets you create a complete database and its tables all at once by uploading a **`.sql`** file. This is useful for quickly setting up a project or restoring a backup.
+* The **Export** feature does the opposite. It generates a **`.sql`** file from your current database. This file contains all the necessary SQL commands to recreate your database exactly as it is. You'll use this for two key purposes:
+    1.  **Migrating your site:** When you move your website from your local machine to a web host, you'll use this file to rebuild the database on your host's server.
+    2.  **Creating backups:** This file serves as a crucial backup, ensuring you can restore your data if anything goes wrong.
+
+By using phpMyAdmin, you can visually structure your database, create tables with the correct data types, and manage backups without having to write complex SQL commands by hand.
