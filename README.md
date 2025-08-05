@@ -1294,3 +1294,71 @@ phpMyAdmin also makes it easy to move data around.
     2.  **Creating backups:** This file serves as a crucial backup, ensuring you can restore your data if anything goes wrong.
 
 By using phpMyAdmin, you can visually structure your database, create tables with the correct data types, and manage backups without having to write complex SQL commands by hand.
+
+-----
+
+## Chapter 19: Working with a Database 💾
+
+For all the websites you've built so far, a major missing piece is a way to permanently store information. You've used variables, but they vanish when the page reloads. This is where **databases** come in. A **database (DB)** is a system for organized and structured data storage, acting like a digital filing cabinet.
+
+### Speaking the Language of Databases: SQL 🗣️
+
+To communicate with a database, you use a special language called **SQL**. Your PHP code acts as the intermediary, sending your SQL commands to a **Database Management System (DBMS)** like **MySQL**.
+
+**The communication process looks like this:**
+
+1.  Your PHP script receives a user request.
+2.  PHP sends an **SQL command** to MySQL.
+3.  MySQL processes the command (e.g., saves a new user or fetches recipes).
+4.  MySQL sends the result back to PHP, which then uses the data to build the final webpage.
+
+Here's an example of a simple SQL command:
+
+```sql
+SELECT * FROM recipes
+```
+
+This command asks the database to retrieve all fields (`*`) from the `recipes` table.
+
+### Connecting with PHP using PDO 🔗
+
+Before you can send any SQL commands, your PHP script must connect to the database. We do this using the **PDO (PHP Data Objects)** extension. This requires the database host, name, username, and password. It's a good practice to use a **`try...catch`** block to handle any potential connection errors gracefully, so your site doesn't expose sensitive information.
+
+Here is what a PDO connection looks like:
+
+```php
+<?php
+try {
+    $mysqlClient = new PDO(
+        'mysql:host=localhost;dbname=partage_de_recettes;charset=utf8',
+        'root',
+        ''
+    );
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+?>
+```
+
+In this code:
+
+* The `try` block attempts to establish the connection.
+* If a problem occurs (like a wrong password), the `catch` block executes, stopping the script and displaying a safe error message.
+
+### The Structure of a Database 🏗️
+
+To understand a database, think of it as a set of nested containers:
+
+* **Database**: The entire filing cabinet.
+* **Table**: A specific drawer in the cabinet that holds a single type of information, like all your user accounts or all your recipes.
+* **Field**: The columns in a table that define what kind of information is stored (e.g., `email`, `name`).
+* **Entry**: The rows in a table, representing a single complete record (e.g., one user's full information).
+
+Here’s what a table with fields and entries looks like:
+
+| Number | Full Name | Email |
+|---|---|---|
+| 1 | Mathieu Nebra | mathieu.nebra@exemple.com |
+| 2 | Laurène Castor | laurene.castor@exemple.com |
+
+By structuring your data in tables with fields and entries, you can efficiently store, find, and manage large amounts of information. While MySQL stores this data in physical files on your server, you should never touch these files directly; always communicate with the database using SQL commands.

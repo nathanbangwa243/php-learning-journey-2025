@@ -3,6 +3,33 @@
 session_start();
 require_once(__DIR__ . '/variables.php');
 require_once(__DIR__ . '/functions.php');
+
+try{
+    $mysqlClient = new PDO (
+        'mysql:host=localhost;dbname=partage_de_recettes;charset=utf8',
+        'root',
+        '',
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        
+    );
+    
+    $query = 'SELECT * FROM recipes WHERE is_enabled = :is_enabled';
+    $recipesStatement = $mysqlClient->prepare($query);
+    
+    // Execute teh query
+    $recipesStatement->execute([
+            'is_enabled' => true,
+    ]);
+    
+    // fetch datas
+    $recipes = $recipesStatement->fetchAll();
+    
+    echo ('Recipes Count : ' . count($recipes));
+}
+catch (Exception $e){
+    die("Error : " . $e->getMessage());
+}
+
 ?>
 
 <!DOCTYPE html>
