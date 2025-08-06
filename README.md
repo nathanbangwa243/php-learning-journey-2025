@@ -1406,3 +1406,32 @@ DELETE FROM recipes WHERE recipe_id=:id
 ```
 
 If you forget the `WHERE` clause, this command will empty the entire table. As you write these new SQL queries in PHP, you should continue to use prepared statements to prevent SQL injection vulnerabilities.
+
+-----
+
+## Chapter 21: Adding Comments with SQL Joins 💾
+
+Up to this point, you've been working with only one table at a time. But in a real-world application, your data is often spread across multiple interconnected tables to avoid repetition and keep things organized. For example, instead of repeating a user's email in every comment, you can link the comment to the user's unique ID. To gather this related information together, you use **SQL joins**.
+
+### Modeling Relationships 🤝
+
+When you create a new table, like for `comments`, you don't need to duplicate information from another table like `users`. Instead, you create a field in the `comments` table that stores the `id` from the `users` table. This `user_id` field acts as a reference, creating a **relationship** between the two tables. The database doesn't automatically know this relationship; you have to tell it how the tables are connected in your SQL query. This is done with a **join**.
+
+### The Principle of Joins 🔗
+
+A **join** is an SQL command that combines rows from two or more tables based on a related column. There are two main types of joins:
+
+* **Internal Joins (`INNER JOIN`)**: This type of join is strict. It only retrieves rows where there is a match between the two tables. For example, an `INNER JOIN` between `users` and `comments` would only show users who have actually posted a comment.
+
+* **External Joins (`LEFT`/`RIGHT JOIN`)**: This type of join is more flexible. It retrieves all rows from one table, regardless of whether there's a match in the other table. For instance, a `LEFT JOIN` would show all users, even those who have never posted a comment (the comment field would simply be `NULL` for them).
+
+Here's an example of an `INNER JOIN` to get the comment and author name:
+
+```sql
+SELECT u.full_name, c.comment
+FROM users u
+INNER JOIN comments c
+ON u.user_id = c.user_id
+```
+
+This query gets the `full_name` from the `users` table and the `comment` from the `comments` table. The `ON` clause specifies the condition where the tables are linked: when the `user_id` in both tables is the same. By using joins, you can efficiently pull together all the necessary data from multiple tables in a single, powerful request.
