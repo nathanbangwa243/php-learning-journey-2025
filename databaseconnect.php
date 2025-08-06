@@ -1,20 +1,14 @@
 <?php
 
-// Connection to the database
-include_once (__DIR__ . '/mysql.php');
-
-try{
-
+try {
     $mysqlClient = new PDO(
-        $mysqlURI,
-        $userName,
-        $password,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        sprintf('mysql:host=%s;dbname=%s;port=%s;charset=utf8', MYSQL_HOST, MYSQL_NAME, MYSQL_PORT),
+        MYSQL_USER,
+        MYSQL_PASSWORD
     );
-
-}
-catch (Exception $error){
-    die('Error : ' . $error->getMessage());
+    $mysqlClient->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $exception) {
+    die('Erreur : ' . $exception->getMessage());
 }
 
 ?>

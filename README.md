@@ -1362,3 +1362,47 @@ Here’s what a table with fields and entries looks like:
 | 2 | Laurène Castor | laurene.castor@exemple.com |
 
 By structuring your data in tables with fields and entries, you can efficiently store, find, and manage large amounts of information. While MySQL stores this data in physical files on your server, you should never touch these files directly; always communicate with the database using SQL commands.
+
+---
+
+## Chapter 20: Adding, Modifying, and Deleting Recipes\! 💾
+
+To build a truly interactive website, you need to let users add, change, and remove data. This is where we go beyond just reading from the database and learn how to write to it using three essential SQL commands: `INSERT`, `UPDATE`, and `DELETE`.
+
+### Adding Recipes with `INSERT INTO` ➕
+
+To let users add new recipes, you'll need a form to collect the data and a PHP script to process it. The key to this is the **`INSERT INTO`** SQL command, which adds a new record to a specific table.
+
+Here's a simple example of the SQL command:
+
+```sql
+INSERT INTO recipes (title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)
+```
+
+In your PHP script, you'll collect the data, prepare this `INSERT` statement with secure placeholders, and then execute it. The database handles the rest, including assigning a unique `id` to the new recipe if the field is set to `AUTO_INCREMENT`.
+
+### Editing Recipes with `UPDATE` 📝
+
+To allow users to modify their recipes, you'll use the **`UPDATE`** command to change existing entries. This command requires you to specify which fields to change and, crucially, which specific entry to change. This is where the **`WHERE`** clause becomes essential.
+
+Without the `WHERE` clause, the `UPDATE` command would modify *every single recipe* in the table. The `SET` keyword indicates which fields to update with new values. By using `WHERE recipe_id = :id`, you ensure only the correct recipe is edited.
+
+Here's an example of the SQL command:
+
+```sql
+UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :id
+```
+
+### Deleting Recipes with `DELETE` 🗑️
+
+Finally, to let users remove a recipe, you use the **`DELETE FROM`** command. This command is fast and simple, but also dangerous because there is no way to recover data once it's gone.
+
+The syntax is straightforward, but just like with `UPDATE`, you **must** use a `WHERE` clause to specify which entry to delete.
+
+Here's an example of the SQL command:
+
+```sql
+DELETE FROM recipes WHERE recipe_id=:id
+```
+
+If you forget the `WHERE` clause, this command will empty the entire table. As you write these new SQL queries in PHP, you should continue to use prepared statements to prevent SQL injection vulnerabilities.
