@@ -20,12 +20,12 @@
             <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help">
             <div id="email-help" class="form-text">Nous ne revendrons pas votre email.</div>
         </div>
-<!--        <input type="file" class="form-control" id="screenshot" name="screenshot" />-->
-
         <div class="mb-3">
             <label for="message" class="form-label">Votre message</label>
             <textarea class="form-control" placeholder="Exprimez vous" id="message" name="message"></textarea>
-            <input type="hidden" name="nickname" value="ElectroDango">
+        </div>
+        <div class="mb-3">
+            <label for="screenshot" class="form-label">Votre capture d'écran</label>
             <input type="file" class="form-control" id="screenshot" name="screenshot" />
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>

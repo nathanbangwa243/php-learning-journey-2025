@@ -10,3 +10,5 @@ session_destroy();
 
 // Rediriger l'utilisateur vers la page d'accueil
 redirectToUrl('index.php');
+
+?>

@@ -1233,3 +1233,256 @@ To create a fully functional login system:
 This combination of sessions (for temporary, server-side persistence) and cookies (for long-term, client-side persistence, often used to remember session IDs) is fundamental for creating interactive and personalized user experiences on your website.
 
 Now that you can manage persistent data, how will you use sessions and cookies to enhance user experience on your recipe website beyond just basic login?
+
+-----
+
+## Chapter 17 : Working with Databases: Storing and Organizing Data 💾
+
+For all the websites you've built so far, a major missing piece is a way to permanently store information. You've used variables, but they vanish when the page reloads. This is where **databases** come in.
+
+A **database (DB)** is a system for organized and structured data storage. While you could technically save data in files, it quickly becomes messy. A database, however, acts like a digital filing cabinet, keeping all your data neatly organized in a specific structure.
+
+### Speaking the Language of Databases: SQL 🗣️
+
+To communicate with a database, you use a special language called **SQL**. It's the standard for giving commands to a **Database Management System (DBMS)** like **MySQL**. Your PHP code acts as the intermediary; you tell PHP what to ask MySQL, and PHP executes that request.
+
+**The process looks like this:**
+1.  A user's browser sends a request to your web server.
+2.  Your PHP script receives the request.
+3.  The PHP code, if it needs to, sends an **SQL command** to MySQL.
+4.  MySQL processes the command (for example, saving a new user's information or fetching a list of recipes).
+5.  MySQL sends the result back to PHP.
+6.  PHP then uses that data to build and send the final HTML page back to the user's browser.
+
+### The Structure of a Database 🏗️
+
+To understand a database, think of it as a set of nested containers:
+
+* **Database**: The largest container, like a whole filing cabinet. It holds all your tables.
+* **Table**: A section within the database, similar to a single drawer in the filing cabinet. Each table holds a specific type of information, like all your user accounts or all your recipes.
+* **Field**: These are the columns in a table. They define what kind of information is stored, like a user's `email`, `name`, or `password`.
+* **Entry**: These are the rows in a table. Each entry is a single record, like one specific user's complete information.
+
+This structured approach makes it incredibly easy to store, find, and manage large amounts of data. You'll create tables for your website's users, recipes, and comments, which will become the foundation for a dynamic and interactive site. While MySQL stores this data in physical files on your server, you should never touch these files directly; you should always communicate with MySQL using SQL commands.
+
+-----
+
+Now that you know what a database is, let's look at how to build one. While you can communicate with a database using code, it's often easier to use a visual tool. We'll use **phpMyAdmin**, which is a popular browser-based tool for managing MySQL databases.
+
+---
+
+## Chapter 18 : Building Your Database with phpMyAdmin 🏗️
+
+Inside phpMyAdmin, you'll create **tables** to hold your data. A table is like a spreadsheet, and each column in that table is called a **field**. When creating a table for something like recipes, you need to define a field for each piece of information, such as the recipe title or the recipe content.
+
+For each field, you'll also assign a **data type**. While PHP has a few data types, MySQL has many. You'll primarily rely on these four:
+
+* `INT`: For whole numbers.
+* `VARCHAR`: For short text strings (up to 255 characters).
+* `TEXT`: For long text, like an entire recipe or a book.
+* `DATE`: For storing a date.
+
+Every table needs a **primary key**. This is a field that uniquely identifies each entry (or row) in the table. The standard practice is to create a field called `id`, mark it as the **PRIMARY** key, and enable the `AUTO_INCREMENT` option. This tells MySQL to automatically assign a new, unique number to each new entry, saving you the trouble of doing it yourself.
+
+### Importing and Exporting Data 💾
+
+phpMyAdmin also makes it easy to move data around.
+
+* The **Import** feature lets you create a complete database and its tables all at once by uploading a **`.sql`** file. This is useful for quickly setting up a project or restoring a backup.
+* The **Export** feature does the opposite. It generates a **`.sql`** file from your current database. This file contains all the necessary SQL commands to recreate your database exactly as it is. You'll use this for two key purposes:
+    1.  **Migrating your site:** When you move your website from your local machine to a web host, you'll use this file to rebuild the database on your host's server.
+    2.  **Creating backups:** This file serves as a crucial backup, ensuring you can restore your data if anything goes wrong.
+
+By using phpMyAdmin, you can visually structure your database, create tables with the correct data types, and manage backups without having to write complex SQL commands by hand.
+
+-----
+
+## Chapter 19: Working with a Database 💾
+
+For all the websites you've built so far, a major missing piece is a way to permanently store information. You've used variables, but they vanish when the page reloads. This is where **databases** come in. A **database (DB)** is a system for organized and structured data storage, acting like a digital filing cabinet.
+
+### Speaking the Language of Databases: SQL 🗣️
+
+To communicate with a database, you use a special language called **SQL**. Your PHP code acts as the intermediary, sending your SQL commands to a **Database Management System (DBMS)** like **MySQL**.
+
+**The communication process looks like this:**
+
+1.  Your PHP script receives a user request.
+2.  PHP sends an **SQL command** to MySQL.
+3.  MySQL processes the command (e.g., saves a new user or fetches recipes).
+4.  MySQL sends the result back to PHP, which then uses the data to build the final webpage.
+
+Here's an example of a simple SQL command:
+
+```sql
+SELECT * FROM recipes
+```
+
+This command asks the database to retrieve all fields (`*`) from the `recipes` table.
+
+### Connecting with PHP using PDO 🔗
+
+Before you can send any SQL commands, your PHP script must connect to the database. We do this using the **PDO (PHP Data Objects)** extension. This requires the database host, name, username, and password. It's a good practice to use a **`try...catch`** block to handle any potential connection errors gracefully, so your site doesn't expose sensitive information.
+
+Here is what a PDO connection looks like:
+
+```php
+<?php
+try {
+    $mysqlClient = new PDO(
+        'mysql:host=localhost;dbname=partage_de_recettes;charset=utf8',
+        'root',
+        ''
+    );
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+?>
+```
+
+In this code:
+
+* The `try` block attempts to establish the connection.
+* If a problem occurs (like a wrong password), the `catch` block executes, stopping the script and displaying a safe error message.
+
+### The Structure of a Database 🏗️
+
+To understand a database, think of it as a set of nested containers:
+
+* **Database**: The entire filing cabinet.
+* **Table**: A specific drawer in the cabinet that holds a single type of information, like all your user accounts or all your recipes.
+* **Field**: The columns in a table that define what kind of information is stored (e.g., `email`, `name`).
+* **Entry**: The rows in a table, representing a single complete record (e.g., one user's full information).
+
+Here’s what a table with fields and entries looks like:
+
+| Number | Full Name | Email |
+|---|---|---|
+| 1 | Mathieu Nebra | mathieu.nebra@exemple.com |
+| 2 | Laurène Castor | laurene.castor@exemple.com |
+
+By structuring your data in tables with fields and entries, you can efficiently store, find, and manage large amounts of information. While MySQL stores this data in physical files on your server, you should never touch these files directly; always communicate with the database using SQL commands.
+
+---
+
+## Chapter 20: Adding, Modifying, and Deleting Recipes\! 💾
+
+To build a truly interactive website, you need to let users add, change, and remove data. This is where we go beyond just reading from the database and learn how to write to it using three essential SQL commands: `INSERT`, `UPDATE`, and `DELETE`.
+
+### Adding Recipes with `INSERT INTO` ➕
+
+To let users add new recipes, you'll need a form to collect the data and a PHP script to process it. The key to this is the **`INSERT INTO`** SQL command, which adds a new record to a specific table.
+
+Here's a simple example of the SQL command:
+
+```sql
+INSERT INTO recipes (title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)
+```
+
+In your PHP script, you'll collect the data, prepare this `INSERT` statement with secure placeholders, and then execute it. The database handles the rest, including assigning a unique `id` to the new recipe if the field is set to `AUTO_INCREMENT`.
+
+### Editing Recipes with `UPDATE` 📝
+
+To allow users to modify their recipes, you'll use the **`UPDATE`** command to change existing entries. This command requires you to specify which fields to change and, crucially, which specific entry to change. This is where the **`WHERE`** clause becomes essential.
+
+Without the `WHERE` clause, the `UPDATE` command would modify *every single recipe* in the table. The `SET` keyword indicates which fields to update with new values. By using `WHERE recipe_id = :id`, you ensure only the correct recipe is edited.
+
+Here's an example of the SQL command:
+
+```sql
+UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :id
+```
+
+### Deleting Recipes with `DELETE` 🗑️
+
+Finally, to let users remove a recipe, you use the **`DELETE FROM`** command. This command is fast and simple, but also dangerous because there is no way to recover data once it's gone.
+
+The syntax is straightforward, but just like with `UPDATE`, you **must** use a `WHERE` clause to specify which entry to delete.
+
+Here's an example of the SQL command:
+
+```sql
+DELETE FROM recipes WHERE recipe_id=:id
+```
+
+If you forget the `WHERE` clause, this command will empty the entire table. As you write these new SQL queries in PHP, you should continue to use prepared statements to prevent SQL injection vulnerabilities.
+
+-----
+
+## Chapter 21: Adding Comments with SQL Joins 💾
+
+Up to this point, you've been working with only one table at a time. But in a real-world application, your data is often spread across multiple interconnected tables to avoid repetition and keep things organized. For example, instead of repeating a user's email in every comment, you can link the comment to the user's unique ID. To gather this related information together, you use **SQL joins**.
+
+### Modeling Relationships 🤝
+
+When you create a new table, like for `comments`, you don't need to duplicate information from another table like `users`. Instead, you create a field in the `comments` table that stores the `id` from the `users` table. This `user_id` field acts as a reference, creating a **relationship** between the two tables. The database doesn't automatically know this relationship; you have to tell it how the tables are connected in your SQL query. This is done with a **join**.
+
+### The Principle of Joins 🔗
+
+A **join** is an SQL command that combines rows from two or more tables based on a related column. There are two main types of joins:
+
+* **Internal Joins (`INNER JOIN`)**: This type of join is strict. It only retrieves rows where there is a match between the two tables. For example, an `INNER JOIN` between `users` and `comments` would only show users who have actually posted a comment.
+
+* **External Joins (`LEFT`/`RIGHT JOIN`)**: This type of join is more flexible. It retrieves all rows from one table, regardless of whether there's a match in the other table. For instance, a `LEFT JOIN` would show all users, even those who have never posted a comment (the comment field would simply be `NULL` for them).
+
+Here's an example of an `INNER JOIN` to get the comment and author name:
+
+```sql
+SELECT u.full_name, c.comment
+FROM users u
+INNER JOIN comments c
+ON u.user_id = c.user_id
+```
+
+This query gets the `full_name` from the `users` table and the `comment` from the `comments` table. The `ON` clause specifies the condition where the tables are linked: when the `user_id` in both tables is the same. By using joins, you can efficiently pull together all the necessary data from multiple tables in a single, powerful request.
+
+-----
+
+## Chapter 22: Going Further with SQL Functions 💾
+
+SQL isn't just for adding and retrieving data; it also has built-in functions that can perform calculations and manipulate data directly within your database queries. Using these functions allows you to offload some of the work from PHP to the database, making your code more efficient. These functions can be broken down into two main types: **scalar functions** and **aggregate functions**.
+
+### Scalar Functions: Modifying Each Entry 🧮
+
+**Scalar functions** act on each row individually, returning a modified value for that row. They are useful for formatting data, changing text, or performing simple calculations on a per-entry basis.
+
+For example, the `DATE_FORMAT()` function can reformat a date field like `created_at` into a more readable format. You can also give this newly formatted field a temporary name, or **alias**, using the `AS` keyword.
+
+Here's an example of using a scalar function:
+
+```sql
+SELECT *, DATE_FORMAT(c.created_at, "%d/%m/%Y") AS comment_date
+FROM comments c
+```
+
+This query returns all the columns from the `comments` table, plus a new "virtual" column named `comment_date` with the date formatted as day/month/year. The original data in the table remains unchanged.
+
+### Aggregate Functions: Calculating a Single Value 📊
+
+Unlike scalar functions, **aggregate functions** perform a calculation on a group of rows and return a single value. For instance, you can use `AVG()` to find the average value of a column or `SUM()` to get the total.
+
+Here is an example of an aggregate function that calculates the average review rating and rounds the result:
+
+```sql
+SELECT ROUND(AVG(c.review),1) AS rating
+FROM recipes r LEFT JOIN comments c ON r.recipe_id = c.recipe_id
+WHERE r.recipe_id = 1
+```
+
+This query returns just one value: the rounded average rating for the recipe with ID 1. Because you are only fetching a single result, you can use the `fetch()` method in PHP instead of `fetchAll()` to retrieve the data more efficiently.
+
+### Grouping and Filtering Results 🧐
+
+To apply an aggregate function to specific categories of data, you use the **`GROUP BY`** clause. This lets you perform a calculation for each unique value in a specified column.
+
+For example, to find the average rating for *each recipe*, you would use:
+
+```sql
+SELECT AVG(review) AS rating, recipe_id FROM comments GROUP BY recipe_id
+```
+
+Finally, you can filter the results of your grouped data using the **`HAVING`** clause. While `WHERE` filters data *before* it is grouped, `HAVING` filters the results *after* the aggregation. This allows you to filter based on the calculated values, such as retrieving only recipes with an average rating greater than or equal to 3.
+
+```sql
+SELECT AVG(review) AS rating, recipe_id FROM comments GROUP BY recipe_id HAVING rating >= 3
+```
