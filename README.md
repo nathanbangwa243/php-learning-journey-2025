@@ -1271,7 +1271,7 @@ Now that you know what a database is, let's look at how to build one. While you 
 
 ---
 
-### Chapter 18 : Building Your Database with phpMyAdmin 🏗️
+## Chapter 18 : Building Your Database with phpMyAdmin 🏗️
 
 Inside phpMyAdmin, you'll create **tables** to hold your data. A table is like a spreadsheet, and each column in that table is called a **field**. When creating a table for something like recipes, you need to define a field for each piece of information, such as the recipe title or the recipe content.
 
@@ -1435,3 +1435,54 @@ ON u.user_id = c.user_id
 ```
 
 This query gets the `full_name` from the `users` table and the `comment` from the `comments` table. The `ON` clause specifies the condition where the tables are linked: when the `user_id` in both tables is the same. By using joins, you can efficiently pull together all the necessary data from multiple tables in a single, powerful request.
+
+-----
+
+## Chapter 22: Going Further with SQL Functions 💾
+
+SQL isn't just for adding and retrieving data; it also has built-in functions that can perform calculations and manipulate data directly within your database queries. Using these functions allows you to offload some of the work from PHP to the database, making your code more efficient. These functions can be broken down into two main types: **scalar functions** and **aggregate functions**.
+
+### Scalar Functions: Modifying Each Entry 🧮
+
+**Scalar functions** act on each row individually, returning a modified value for that row. They are useful for formatting data, changing text, or performing simple calculations on a per-entry basis.
+
+For example, the `DATE_FORMAT()` function can reformat a date field like `created_at` into a more readable format. You can also give this newly formatted field a temporary name, or **alias**, using the `AS` keyword.
+
+Here's an example of using a scalar function:
+
+```sql
+SELECT *, DATE_FORMAT(c.created_at, "%d/%m/%Y") AS comment_date
+FROM comments c
+```
+
+This query returns all the columns from the `comments` table, plus a new "virtual" column named `comment_date` with the date formatted as day/month/year. The original data in the table remains unchanged.
+
+### Aggregate Functions: Calculating a Single Value 📊
+
+Unlike scalar functions, **aggregate functions** perform a calculation on a group of rows and return a single value. For instance, you can use `AVG()` to find the average value of a column or `SUM()` to get the total.
+
+Here is an example of an aggregate function that calculates the average review rating and rounds the result:
+
+```sql
+SELECT ROUND(AVG(c.review),1) AS rating
+FROM recipes r LEFT JOIN comments c ON r.recipe_id = c.recipe_id
+WHERE r.recipe_id = 1
+```
+
+This query returns just one value: the rounded average rating for the recipe with ID 1. Because you are only fetching a single result, you can use the `fetch()` method in PHP instead of `fetchAll()` to retrieve the data more efficiently.
+
+### Grouping and Filtering Results 🧐
+
+To apply an aggregate function to specific categories of data, you use the **`GROUP BY`** clause. This lets you perform a calculation for each unique value in a specified column.
+
+For example, to find the average rating for *each recipe*, you would use:
+
+```sql
+SELECT AVG(review) AS rating, recipe_id FROM comments GROUP BY recipe_id
+```
+
+Finally, you can filter the results of your grouped data using the **`HAVING`** clause. While `WHERE` filters data *before* it is grouped, `HAVING` filters the results *after* the aggregation. This allows you to filter based on the calculated values, such as retrieving only recipes with an average rating greater than or equal to 3.
+
+```sql
+SELECT AVG(review) AS rating, recipe_id FROM comments GROUP BY recipe_id HAVING rating >= 3
+```
