@@ -892,16 +892,16 @@ URLs aren't just addresses; they're also carriers of data.
 
     (Note: In HTML, `&` becomes `&amp;` for proper coding practice).
 
-3.  **Using HTML Forms with GET Method:**
+3. **Using HTML Forms with GET Method:**
     Another common way to send parameters through the URL is by using an HTML `<form>` tag with `method="GET"`. When the user submits this form, the names and values from its input fields are automatically added to the URL.
 
-    ```html
-    <form action="submit_contact.php" method="GET">
-        <input type="email" name="user_email">
-        <input type="text" name="user_message">
-        <button type="submit">Send</button>
-    </form>
-    ```
+   ```html
+   <form action="submit_contact.php" method="GET">
+       <input type="email" name="user_email">
+       <input type="text" name="user_message">
+       <button type="submit">Send</button>
+   </form>
+   ```
 
     If a user enters "test@example.com" and "Hi there\!", the URL might look like: `submit_contact.php?user_email=test%40example.com&user_message=Hi+there%21`.
 
@@ -1038,8 +1038,9 @@ To allow users to send files, you'll update your contact form and PHP code. Just
 First, you need to tell your HTML form that it will be handling files. Add the attribute `enctype="multipart/form-data"` to your `<form>` tag:
 
 ```html
+
 <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
-    <input type="file" name="screenshot" />
+    <input type="file" name="screenshot"/>
     <button type="submit">Send</button>
 </form>
 ```
