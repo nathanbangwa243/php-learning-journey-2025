@@ -1,5 +1,36 @@
 # My PHP Learning Journey 🚀 2025
 
+## Table of Contents
+- [MODULE 1 : DESIGN YOUR WEBSITE WITH PHP AND MYSQL](#MODULE-1--DESIGN-YOUR-WEBSITE-WITH-PHP-AND-MYSQL)
+- [MODULE 2 : ADOPT-AN-MVC-ARCHITECTURE-IN-PHP](php-mvc/README.md)
+
+# MODULE 1 : DESIGN YOUR WEBSITE WITH PHP AND MYSQL
+
+## Table of Contents
+
+- [Chapter 1 : The Web's Hidden Machinery: Client, Server, and Dynamic Content](#chapter-1--the-webs-hidden-machinery-client-server-and-dynamic-content)
+- [Chapter 2 : Setting Up Your Digital Workbench: Turning Your Computer into a Web Server](#chapter-2--setting-up-your-digital-workbench-turning-your-computer-into-a-web-server)
+- [Chapter 3 : Your First PHP Script: Adding Dynamic Flair to Your Web Page](#chapter-3--your-first-php-script-adding-dynamic-flair-to-your-web-page)
+- [Chapter 4 : Navigating the Road Ahead: Unveiling PHP Errors](#chapter-4--navigating-the-road-ahead-unveiling-php-errors)
+- [Chapter 5 : Your Project's Building Blocks: Working with Variables in PHP](#chapter-5--your-projects-building-blocks-working-with-variables-in-php)
+- [Chapter 6 : Directing Your Application's Flow: Making Decisions with Conditions](#chapter-6--directing-your-applications-flow-making-decisions-with-conditions)
+- [Chapter 7 : Listing Recipes: Iterating with Loops and Arrays](#chapter-7--listing-recipes-iterating-with-loops-and-arrays)
+- [Chapter 8 : Organizing Your Data: Diving Deeper into Arrays](#chapter-8--organizing-your-data-diving-deeper-into-arrays)
+- [Chapter 9 : Unlocking PHP's Power: Building and Using Functions](#chapter-9--unlocking-phps-power-building-and-using-functions)
+- [Chapter 10 : Troubleshooting Your PHP Code: Understanding Common Errors](#chapter-10--troubleshooting-your-php-code-understanding-common-errors)
+- [Chapter 11 : Building Modular Websites: Organizing Pages with PHP Includes](#chapter-11--building-modular-websites-organizing-pages-with-php-includes)
+- [Chapter 12 : Listening to User Requests: Understanding URLs and Parameters](#chapter-12--listening-to-user-requests-understanding-urls-and-parameters)
+- [Chapter 13 : Securely Managing Forms: Protecting User Input](#chapter-13--securely-managing-forms-protecting-user-input)
+- [Chapter 14 : Enabling File Sharing: Handling User Uploads](#chapter-14--enabling-file-sharing-handling-user-uploads)
+- [Chapter 15 : Building a Login System: Securing Your Content](#chapter-15--building-a-login-system-securing-your-content)
+- [Chapter 16 : Retaining Data: Sessions and Cookies for Persistent Information](#chapter-16--retaining-data-sessions-and-cookies-for-persistent-information)
+- [Chapter 17 : Working with Databases: Storing and Organizing Data](#chapter-17--working-with-databases-storing-and-organizing-data)
+- [Chapter 18 : Building Your Database with phpMyAdmin](#chapter-18--building-your-database-with-phpmyadmin)
+- [Chapter 19 : Working with a Database](#chapter-19--working-with-a-database)
+- [Chapter 20 : Adding, Modifying, and Deleting Recipes](#chapter-20--adding-modifying-and-deleting-recipes)
+- [Chapter 21 : Adding Comments with SQL Joins](#chapter-21--adding-comments-with-sql-joins)
+- [Chapter 22 : Going Further with SQL Functions](#chapter-22--going-further-with-sql-functions)
+
 This repository is a public record of my ongoing journey to learn and master PHP. Here, you'll find:
 
 - **Code Snippets:** Examples demonstrating fundamental PHP concepts.
@@ -9,7 +40,7 @@ This repository is a public record of my ongoing journey to learn and master PHP
 My goal is to build a strong foundation in backend web development using PHP, leading to more complex projects and a comprehensive portfolio. Feel free to explore my progress!
 
 
-## Chaper 1 : The Web's Hidden Machinery: Client, Server, and Dynamic Content 🌐
+## Chapter 1 : The Web's Hidden Machinery: Client, Server, and Dynamic Content
 
 Let's embark on a journey to understand how websites work, especially those powered by PHP!
 
@@ -31,7 +62,7 @@ Now, imagine a **customized newspaper** that changes based on who's reading it a
 
 When you ask the server for a page from a dynamic website, it doesn't just hand you a pre-made one. Instead, it **prepares a unique page just for you**! This "generation" step allows the website to be interactive and adapt its content.
 
-## How Dynamic Websites Come to Life with PHP and MySQL 🛠️
+## How Dynamic Websites Come to Life with PHP and MySQL
 
 Let's dive a little deeper into that "preparation" step:
 
@@ -66,7 +97,7 @@ In essence, while **HTML** and **CSS** lay out and style the visible parts of a 
 
 ---
 
-## Chapter 2 : Setting Up Your Digital Workbench: Turning Your Computer into a Web Server 💻
+## Chapter 2 : Setting Up Your Digital Workbench: Turning Your Computer into a Web Server
 
 You've learned that **PHP** runs on a **server**, not directly on your personal computer. So, to build and test dynamic websites, we'll temporarily transform your computer into a mini-server!
 
@@ -105,7 +136,7 @@ With XAMPP running and your code editor ready, your computer is now prepared for
 
 ---
 
-## Chapter 3 : Your First PHP Script: Adding Dynamic Flair to Your Web Page ✨
+## Chapter 3 : Your First PHP Script: Adding Dynamic Flair to Your Web Page
 
 Now that we know how PHP works behind the scenes, it's time to get hands-on and create your first PHP-powered web page\! Don't expect anything fancy yet; this is about understanding how to weave PHP into your familiar HTML structure.
 
@@ -221,7 +252,7 @@ Let's talk about something you'll definitely encounter as you build websites: er
 
 -----
 
-## Chapter 4 : Navigating the Road Ahead: Unveiling PHP Errors 🚦
+## Chapter 4 : Navigating the Road Ahead: Unveiling PHP Errors
 
 As you begin your journey of writing PHP code, it's crucial to understand how PHP handles "bumps in the road" – what we call **errors**. By default, if your PHP code has a problem, your web page might just show up as a blank screen. This makes it really tough to figure out what went wrong\!
 
@@ -281,7 +312,7 @@ By enabling error display, you've equipped yourself with a vital tool for unders
 
 ---
 
-## Chapter 5 : Your Project's Building Blocks: Working with Variables in PHP 🧱
+## Chapter 5 : Your Project's Building Blocks: Working with Variables in PHP
 
 Alright, let's dive into the core of programming: **variables**\! This is where we start building our recipe-sharing website.
 
@@ -388,7 +419,7 @@ You got it\! Here's a version of the PHP conditions summary, about half the leng
 
 -----
 
-## Chapter 6 : Directing Your Application's Flow: Making Decisions with Conditions 🚦
+## Chapter 6 : Directing Your Application's Flow: Making Decisions with Conditions
 
 This is a crucial step\! **Conditions** allow your PHP application to make smart decisions and behave differently based on specific situations. For our recipe site, this means showing "edit" options only to a recipe's author or displaying recipes only after an admin approves them.
 
@@ -473,7 +504,7 @@ Let's make our recipe site come alive by displaying lists of recipes\! To do tha
 
 -----
 
-## Chapter 7 : Listing Recipes: Iterating with Loops and Arrays 🔄📋
+## Chapter 7 : Listing Recipes: Iterating with Loops and Arrays
 
 For our recipe-sharing website, you'll want to display lists of recipes, comments, and users. Imagine manually writing HTML for every single recipe – that would take forever\! This is where **arrays** and **loops** become your best friends.
 
@@ -552,7 +583,7 @@ By combining arrays to store lists of items and loops to efficiently process and
 
 -----
 
-## Chapter 8 : Organizing Your Data: Diving Deeper into Arrays 🗄️
+## Chapter 8 : Organizing Your Data: Diving Deeper into Arrays
 
 In the previous section, we briefly touched on **arrays** as a way to hold multiple pieces of information. Now, let's explore them in detail. Arrays are powerful, "compound" variables that can store large amounts of related data within a single container. They'll be essential for tasks like displaying lists of recipes.
 
@@ -656,7 +687,7 @@ Let's condense this section on PHP functions into a clear, technical storytellin
 
 -----
 
-## Chapter 9 : Unlocking PHP's Power: Building and Using Functions 🛠️
+## Chapter 9 : Unlocking PHP's Power: Building and Using Functions
 
 Think of **functions** as specialized robots. While loops just repeat the same task, functions are "smart" robots that can perform specific, complex tasks and adapt based on the information you give them. They help you avoid repeating code, making your applications cleaner and more efficient.
 
@@ -745,7 +776,7 @@ With functions, you're now equipped to build more sophisticated and organized PH
 
 ---
 
-## Chapter 10 Troubleshooting Your PHP Code: Understanding Common Errors 🐛
+## Chapter 10 : Troubleshooting Your PHP Code: Understanding Common Errors
 
 It's totally normal for your code not to work perfectly on the first try. Even experienced developers encounter errors. The key is learning to understand what PHP is trying to tell you so you can fix the issues efficiently.
 
@@ -804,7 +835,7 @@ Now that you're prepared to tackle common PHP errors, we're almost ready to brin
 
 -----
 
-## Chapter 11 : Building Modular Websites: Organizing Pages with PHP Includes 🧱
+## Chapter 11 : Building Modular Websites: Organizing Pages with PHP Includes
 
 Let's break down how to organize your website into manageable, reusable blocks using PHP's include feature.
 
@@ -867,7 +898,7 @@ With your site now organized into functional blocks, how will you leverage this 
 ---
 
 
-## Chapter 12 : Listening to User Requests: Understanding URLs and Parameters 👂
+## Chapter 12 : Listening to User Requests: Understanding URLs and Parameters
 
 Let's break down how your website can "listen" to user requests through URLs and make forms interactive.
 
@@ -892,16 +923,16 @@ URLs aren't just addresses; they're also carriers of data.
 
     (Note: In HTML, `&` becomes `&amp;` for proper coding practice).
 
-3.  **Using HTML Forms with GET Method:**
+3. **Using HTML Forms with GET Method:**
     Another common way to send parameters through the URL is by using an HTML `<form>` tag with `method="GET"`. When the user submits this form, the names and values from its input fields are automatically added to the URL.
 
-    ```html
-    <form action="submit_contact.php" method="GET">
-        <input type="email" name="user_email">
-        <input type="text" name="user_message">
-        <button type="submit">Send</button>
-    </form>
-    ```
+   ```html
+   <form action="submit_contact.php" method="GET">
+       <input type="email" name="user_email">
+       <input type="text" name="user_message">
+       <button type="submit">Send</button>
+   </form>
+   ```
 
     If a user enters "test@example.com" and "Hi there\!", the URL might look like: `submit_contact.php?user_email=test%40example.com&user_message=Hi+there%21`.
 
@@ -966,7 +997,7 @@ By understanding how to send, receive, and most importantly, validate parameters
 
 -----
 
-## Chapter 13 : Securely Managing Forms: Protecting User Input 🛡️
+## Chapter 13 : Securely Managing Forms: Protecting User Input
 
 Let's explore how to securely handle information users submit through forms on your website.
 
@@ -1027,7 +1058,7 @@ With the knowledge of securely handling form data, you're ready to build robust 
 
 -----
 
-## Chapter 14 : Enabling File Sharing: Handling User Uploads 📥
+## Chapter 14 : Enabling File Sharing: Handling User Uploads
 
 Let's learn how to let users send files through your website's forms, like sharing a screenshot to help you fix an issue.
 
@@ -1038,8 +1069,9 @@ To allow users to send files, you'll update your contact form and PHP code. Just
 First, you need to tell your HTML form that it will be handling files. Add the attribute `enctype="multipart/form-data"` to your `<form>` tag:
 
 ```html
+
 <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
-    <input type="file" name="screenshot" />
+    <input type="file" name="screenshot"/>
     <button type="submit">Send</button>
 </form>
 ```
@@ -1105,7 +1137,7 @@ By implementing these checks, you can safely allow users to upload files to your
 
 -----
 
-## Chapter 15 : Building a Login System: Securing Your Content 🔒
+## Chapter 15 : Building a Login System: Securing Your Content
 
 Let's dive into creating a simple login system for your website, protecting specific content with a password.
 
@@ -1160,7 +1192,7 @@ With this login system in place, you can now start imagining more advanced featu
 
 -----
 
-## Chapter 16 : Retaining Data: Sessions and Cookies for Persistent Information 🌐
+## Chapter 16 : Retaining Data: Sessions and Cookies for Persistent Information
 
 Let's explore how to make your website "remember" users, allowing for a persistent login experience across multiple pages.
 
@@ -1236,7 +1268,7 @@ Now that you can manage persistent data, how will you use sessions and cookies t
 
 -----
 
-## Chapter 17 : Working with Databases: Storing and Organizing Data 💾
+## Chapter 17 : Working with Databases: Storing and Organizing Data
 
 For all the websites you've built so far, a major missing piece is a way to permanently store information. You've used variables, but they vanish when the page reloads. This is where **databases** come in.
 
@@ -1271,7 +1303,7 @@ Now that you know what a database is, let's look at how to build one. While you 
 
 ---
 
-## Chapter 18 : Building Your Database with phpMyAdmin 🏗️
+## Chapter 18 : Building Your Database with phpMyAdmin
 
 Inside phpMyAdmin, you'll create **tables** to hold your data. A table is like a spreadsheet, and each column in that table is called a **field**. When creating a table for something like recipes, you need to define a field for each piece of information, such as the recipe title or the recipe content.
 
@@ -1297,7 +1329,7 @@ By using phpMyAdmin, you can visually structure your database, create tables wit
 
 -----
 
-## Chapter 19: Working with a Database 💾
+## Chapter 19 : Working with a Database
 
 For all the websites you've built so far, a major missing piece is a way to permanently store information. You've used variables, but they vanish when the page reloads. This is where **databases** come in. A **database (DB)** is a system for organized and structured data storage, acting like a digital filing cabinet.
 
@@ -1365,7 +1397,7 @@ By structuring your data in tables with fields and entries, you can efficiently 
 
 ---
 
-## Chapter 20: Adding, Modifying, and Deleting Recipes\! 💾
+## Chapter 20 : Adding, Modifying, and Deleting Recipes\!
 
 To build a truly interactive website, you need to let users add, change, and remove data. This is where we go beyond just reading from the database and learn how to write to it using three essential SQL commands: `INSERT`, `UPDATE`, and `DELETE`.
 
@@ -1409,7 +1441,7 @@ If you forget the `WHERE` clause, this command will empty the entire table. As y
 
 -----
 
-## Chapter 21: Adding Comments with SQL Joins 💾
+## Chapter 21 : Adding Comments with SQL Joins
 
 Up to this point, you've been working with only one table at a time. But in a real-world application, your data is often spread across multiple interconnected tables to avoid repetition and keep things organized. For example, instead of repeating a user's email in every comment, you can link the comment to the user's unique ID. To gather this related information together, you use **SQL joins**.
 
@@ -1438,7 +1470,7 @@ This query gets the `full_name` from the `users` table and the `comment` from th
 
 -----
 
-## Chapter 22: Going Further with SQL Functions 💾
+## Chapter 22 : Going Further with SQL Functions
 
 SQL isn't just for adding and retrieving data; it also has built-in functions that can perform calculations and manipulate data directly within your database queries. Using these functions allows you to offload some of the work from PHP to the database, making your code more efficient. These functions can be broken down into two main types: **scalar functions** and **aggregate functions**.
 
