@@ -55,3 +55,27 @@ While this code may function for a simple project, its lack of organization and 
 ### The Problem of Scale 📈
 
 This unstructured approach works for small, simple tasks. However, as soon as you need to add new features or collaborate with others, the problems become significant. It's difficult to make changes without affecting other parts of the code. In a team, this approach leads to constant code conflicts and a frustrating development process. By understanding these limitations, you'll see why a structured approach like **MVC architecture** is essential for building robust and scalable applications.
+
+-----
+
+## Chapter 3: Separating Display from PHP Processing 💾
+
+As you move from writing beginner code to professional code, a crucial first step is to stop mixing your PHP logic with your HTML. This practice, known as **separation of concerns**, makes your code easier to read, maintain, and work on in a team. This chapter guides you through the process of refactoring a single-file application into a more modular structure.
+
+### A First Separation: Inside a Single File ✂️
+
+The first step is to clearly divide your code into two main sections within the same file:
+
+1.  **Data Retrieval:** The top of the file contains all the PHP code responsible for connecting to the database and fetching the necessary information. The result is stored in simple, structured PHP variables like arrays.
+2.  **Data Display:** The bottom of the file contains the HTML, which loops through the PHP variables to display the data. This section's only job is to format and present the information retrieved in the first section.
+
+This initial separation makes it immediately easier to see where data is being processed versus where it is being displayed.
+
+### Separating into Two Files 📁
+
+The next logical step is to split these two sections into separate files, a practice commonly used in professional development.
+
+* `index.php`: This file becomes the "controller." It handles all the PHP logic, including the database connection and the data retrieval. After preparing the data, it uses the `require` function to load the display file.
+* `templates/homepage.php`: This file acts as the "view" or "template." It contains the HTML and minimal PHP logic (like `foreach` loops or `echo` statements) needed to display the data. It receives the variables prepared by `index.php` and focuses solely on presentation.
+
+The use of `require` is preferred over `include` because it will stop the script if the template file is missing, preventing an incomplete or broken page from being served. This refactoring process, called **refactorization**, doesn't add new features, but it dramatically improves the quality and maintainability of your codebase.
