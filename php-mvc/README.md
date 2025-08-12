@@ -106,3 +106,21 @@ This chapter refactors the code into these three files:
     3.  `require('templates/homepage.php');` to load the View and display the data.
 
 This new structure is a significant step forward. It allows different developers to work on different parts of the application without interfering with each other. For example, a database expert could optimize the `getPosts()` function without needing to touch the display code, and a front-end developer could redesign the HTML without knowing any SQL.
+
+---
+
+## Chapter 5: Polishing Your Code's Cosmetics
+
+This chapter focuses on several small but important improvements that make your code more professional and easier to maintain. These "cosmetic" changes involve updating your code to follow industry-standard practices, even though the application's functionality remains the same.
+
+### Refining the Codebase ✒️
+
+You'll make three key changes to improve the quality of your code:
+
+* **Remove the Closing PHP Tag**: In files that contain **only** PHP code (like `index.php` and `src/model.php`), you should remove the closing `?>` tag. This is a best practice that prevents accidentally outputting unwanted whitespace, which can cause subtle bugs. PHP automatically understands that the file ends at the last line, so the tag isn't needed.
+
+* **Use English in Your Code and Database**: To make your code accessible to developers worldwide, all variable names, function names, and even database table and field names should be in English. This promotes clarity and consistency, which is vital for team collaboration.
+
+* **Adopt Short Echo Tags**: In your HTML templates (`templates/homepage.php`), you can use the short echo tag `<?= ` as a shortcut for `<?php echo `. This makes your templates cleaner and more readable by reducing the amount of PHP syntax needed to display a variable.
+
+These changes are part of a refactoring process that focuses on improving the code's quality without adding new features. By applying these standards, you align your project with professional conventions and make it more robust and maintainable in the long run.
