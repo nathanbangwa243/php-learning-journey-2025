@@ -38,7 +38,7 @@ While you could jump straight to using a framework, it's highly recommended to f
 
 -----
 
-## Chapter 2: Discovering the Limits of a Beginner's Code 💾
+## Chapter 2: Discovering the Limits of a Beginner's Code
 
 In this chapter, you’ll dive into a real-world example of what makes code un-professional. Using a sample blog project, you'll see how a seemingly functional codebase can quickly become unmanageable. This exercise highlights the need to move beyond just writing code that "works" and start structuring it for future growth and collaboration.
 
@@ -58,7 +58,7 @@ This unstructured approach works for small, simple tasks. However, as soon as yo
 
 -----
 
-## Chapter 3: Separating Display from PHP Processing 💾
+## Chapter 3: Separating Display from PHP Processing
 
 As you move from writing beginner code to professional code, a crucial first step is to stop mixing your PHP logic with your HTML. This practice, known as **separation of concerns**, makes your code easier to read, maintain, and work on in a team. This chapter guides you through the process of refactoring a single-file application into a more modular structure.
 
@@ -79,3 +79,30 @@ The next logical step is to split these two sections into separate files, a prac
 * `templates/homepage.php`: This file acts as the "view" or "template." It contains the HTML and minimal PHP logic (like `foreach` loops or `echo` statements) needed to display the data. It receives the variables prepared by `index.php` and focuses solely on presentation.
 
 The use of `require` is preferred over `include` because it will stop the script if the template file is missing, preventing an incomplete or broken page from being served. This refactoring process, called **refactorization**, doesn't add new features, but it dramatically improves the quality and maintainability of your codebase.
+
+-----
+
+## Chapter 4: Isolating Data Access
+
+In this chapter, you'll take the concept of code separation a step further by completely isolating your database and data-retrieval logic. This is the final step in building the foundation for a professional, modular application using the **Model-View-Controller (MVC)** architecture.
+
+### The MVC Triad 🏗️
+
+The MVC pattern organizes your code into three distinct parts, each with a specific role:
+
+* **Model (`src/model.php`)**: The Model is responsible for all data-related tasks. It knows how to connect to the database and retrieve information. It contains a function, such as `getPosts()`, which performs the SQL query and returns the results. It is completely independent of how the data will be displayed.
+* **View (`templates/homepage.php`)**: The View's sole purpose is to display the data. It contains the HTML and minimal PHP logic (like loops) to present the information it receives. The View is unaware of where the data came from.
+* **Controller (`index.php`)**: The Controller acts as the intermediary. It connects the Model and the View. Its job is to handle a user's request, call the appropriate function in the Model to get the data, and then pass that data to the View to be displayed.
+
+### The New Structure in Action 🚀
+
+This chapter refactors the code into these three files:
+
+* `src/model.php`: This file now contains a function `getPosts()` that encapsulates the entire database connection and data retrieval logic. It returns the list of posts as a simple array.
+* `templates/homepage.php`: This file remains unchanged from the previous chapter. It simply takes the `$posts` variable and displays it in HTML.
+* `index.php`: This file becomes the Controller. It's now very simple, containing only three lines of code:
+    1.  `require('src/model.php');` to load the Model's functions.
+    2.  `$posts = getPosts();` to call the function and get the data.
+    3.  `require('templates/homepage.php');` to load the View and display the data.
+
+This new structure is a significant step forward. It allows different developers to work on different parts of the application without interfering with each other. For example, a database expert could optimize the `getPosts()` function without needing to touch the display code, and a front-end developer could redesign the HTML without knowing any SQL.
