@@ -124,3 +124,30 @@ You'll make three key changes to improve the quality of your code:
 * **Adopt Short Echo Tags**: In your HTML templates (`templates/homepage.php`), you can use the short echo tag `<?= ` as a shortcut for `<?php echo `. This makes your templates cleaner and more readable by reducing the amount of PHP syntax needed to display a variable.
 
 These changes are part of a refactoring process that focuses on improving the code's quality without adding new features. By applying these standards, you align your project with professional conventions and make it more robust and maintainable in the long run.
+
+-----
+
+## Chapter 6: Understanding the MVC Architecture
+
+In the previous chapters, we started to build an application using a specific structure without knowing its name. This structure is a **design pattern**, a proven method for solving common programming problems. The one we've been using is one of the most famous: **MVC**, which stands for **Model-View-Controller**.
+
+The MVC pattern is a way to organize your code into three distinct parts, each with its own role, to make your application more manageable and scalable.
+
+### The Three Pillars of MVC 🏛️
+
+* **Model**: This part handles the **business logic** and data. Its job is to manage the data's state, perform complex calculations, and interact with the database. When the Model is asked for information, it retrieves it and provides it to the Controller without worrying about how it will be presented.
+* **View**: The View is all about presentation. It contains the HTML, along with simple PHP code for things like loops and conditions, to display the information it receives. The View's sole purpose is to format and render data; it never talks to the database.
+* **Controller**: The Controller is the **orchestrator** of the application. It receives requests from the user, decides which Model functions to call, and passes the results to the correct View. It acts as the intermediary, connecting the user's request to the appropriate data and display.
+
+### How Information Flows in MVC 🔄
+
+The flow of information in an MVC application is a one-way street, with the Controller at the center.
+
+
+1.  A user's request (e.g., visiting a specific URL) is received by the **Controller**.
+2.  The Controller asks the **Model** to perform a task, such as fetching a list of blog posts.
+3.  The Model retrieves the data from the database and returns it to the Controller.
+4.  The Controller then gives this data to the **View**.
+5.  The View uses the data to generate an HTML page, which the Controller sends back to the user's browser.
+
+Although this structure seems more complex than a single-file script, it becomes indispensable as a project grows. It makes the code easier to read, maintain, and expand, allowing multiple developers to work on different parts of the application without stepping on each other's toes.
