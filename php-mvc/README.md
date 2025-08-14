@@ -235,3 +235,26 @@ Your new `index.php` file is now much smarter. It:
 3.  **Calls the Right Controller**: Based on the value of `action`, it calls the corresponding controller function. For example, if the URL is `index.php?action=post`, the router will call the `post()` function.
 
 By using this approach, you centralize your application's logic and make it far easier to maintain. When you need to add a new page or feature, you simply add a new controller function and a new rule to your router, without cluttering your main project directory.
+
+-----
+
+## Chapter 10: Organizing into Directories 💾
+
+As your application grows and you add new pages and features, your folders will quickly become cluttered with a large number of files. While a flat file structure might work at the beginning, it's not a sustainable or professional way to build a project. This chapter explains how to organize your code into a logical directory structure based on the application's different features, or **business notions**.
+
+---
+
+### Understanding "Business Notions" 🏢
+
+In programming, there's a key distinction between **technical notions** and **business notions**. Technical notions are concepts related to the underlying technology, like a database connection or a routing system. They are often invisible to the end user. In contrast, business notions are the features and concepts that a client or user would talk about, such as a "contact form," "blog posts," or an "admin dashboard."
+
+---
+
+### Grouping Code by Business Section 📁
+
+To keep your code organized, the best practice is to group related files (controllers, views, and models) into subdirectories that reflect these business notions. For example, if you were to add a contact form to the user-facing part of your blog, you wouldn't just create a `contact.php` file in a top-level directory. Instead, you would create a clear directory structure like this:
+
+* `src/controllers/front/contact.php`
+* `templates/front/contact.php`
+
+This simple structure immediately tells a developer that the files belong to the `front` section of the site and relate to a specific business feature: `contact`. By following this logic, your codebase becomes much easier to navigate and maintain, especially as you add more features.
