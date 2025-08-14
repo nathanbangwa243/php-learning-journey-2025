@@ -171,3 +171,41 @@ Instead of building all three MVC components at once, you'll tackle the problem 
 This new feature requires adding more files to your project. You now have two controllers (`index.php` and `post.php`) and two views (`templates/homepage.php` and `templates/post.php`). The Model (`src/model.php`) is where all the data-handling logic is centralized, including a new function `dbConnect()` to connect to the database. This **refactoring** is a crucial step to avoid repeating the database connection code in every function.
 
 By separating your code this way, you create an application that is not only functional but also organized and maintainable. This structure allows you to build new features logically, file by file, while keeping your different components (data, logic, and display) neatly isolated.
+
+-----
+
+Thank you for the clarification. My apologies for the error. I will update the summary to reflect the correct chapter number.
+
+-----
+
+## Chapter 8: Creating a Page Template
+
+As your application grows, you'll find that certain parts of your HTML, such as the header and footer, are repeated across multiple pages. The most effective way to avoid this repetition and make your code more manageable is to create a **page template**, also known as a **layout**.
+
+### The Problem with Simple Includes ❌
+
+While you could simply use `require('header.php')` and `require('footer.php')` in each of your view files, this approach has a major drawback. It becomes very difficult to customize page-specific elements like the `<title>` tag or a page's menu, because they are hardcoded inside the included files. A more flexible approach is needed to define these elements from within your page's unique content.
+
+### The Solution: A Flexible Layout 🧩
+
+Instead of injecting small pieces of code into a full page, you reverse the process. You create a single **layout file** that contains the entire page structure, with placeholders for content that changes.
+
+For example, a layout file could have placeholders for the page's title and its main content:
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title><?= $title ?></title>
+      <link href="style.css" rel="stylesheet" /> 
+   </head>
+   <body>
+      <?= $content ?>
+   </body>
+</html>
+```
+
+Your individual view files then define these variables (`$title` and `$content`) and include the layout file at the end. To define the main body content, you use a technique called **output buffering**. PHP functions like `ob_start()` and `ob_get_clean()` "memorize" all the HTML output that follows them, capture it into a variable, and then give you a way to insert that into the layout.
+
+This method allows you to easily create new pages without rewriting the same HTML structure, making your entire application more efficient and easier to update.
