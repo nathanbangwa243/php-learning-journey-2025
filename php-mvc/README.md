@@ -209,3 +209,29 @@ For example, a layout file could have placeholders for the page's title and its 
 Your individual view files then define these variables (`$title` and `$content`) and include the layout file at the end. To define the main body content, you use a technique called **output buffering**. PHP functions like `ob_start()` and `ob_get_clean()` "memorize" all the HTML output that follows them, capture it into a variable, and then give you a way to insert that into the layout.
 
 This method allows you to easily create new pages without rewriting the same HTML structure, making your entire application more efficient and easier to update.
+
+-----
+
+## Chapter 9: Creating a Router
+
+In a simple application, you might use separate files like `index.php` and `post.php` to handle different pages. However, this approach quickly becomes messy and difficult to manage as you add more features. A professional solution is to use a single entry point, known as a **front controller** or **router**.
+
+---
+
+### The Router's Role 🛣️
+
+The router's job is to act as the main gateway for all requests to your application. Instead of creating a new PHP file for every page, you create one central `index.php` file. This file then uses a parameter in the URL, such as `?action=post`, to decide which specific code to run.
+
+To make this work, you take your old `index.php` and `post.php` files and turn them into functions within a new `src/controllers/` directory. Each controller file now acts as a code library, containing a function (like `homepage()` or `post()`) that the router can call.
+
+---
+
+### How the New Structure Works ⚙️
+
+Your new `index.php` file is now much smarter. It:
+
+1.  **Includes Controller Files**: It uses `require_once` to load all your controller functions into memory. The `_once` part is crucial because it prevents errors by ensuring each file is included only one time.
+2.  **Checks the URL**: It looks for a specific parameter, `$_GET['action']`, in the URL.
+3.  **Calls the Right Controller**: Based on the value of `action`, it calls the corresponding controller function. For example, if the URL is `index.php?action=post`, the router will call the `post()` function.
+
+By using this approach, you centralize your application's logic and make it far easier to maintain. When you need to add a new page or feature, you simply add a new controller function and a new rule to your router, without cluttering your main project directory.
