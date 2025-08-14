@@ -151,3 +151,23 @@ The flow of information in an MVC application is a one-way street, with the Cont
 5.  The View uses the data to generate an HTML page, which the Controller sends back to the user's browser.
 
 Although this structure seems more complex than a single-file script, it becomes indispensable as a project grows. It makes the code easier to read, maintain, and expand, allowing multiple developers to work on different parts of the application without stepping on each other's toes.
+
+-----
+
+## Chapter 7: Displaying Comments
+
+Now that your blog's core structure is in place, it's time to add a new feature: a dedicated page for each blog post and its comments. This chapter walks you through the process of adding this feature by applying your knowledge of the **Model-View-Controller (MVC)** architecture.
+
+### A Concrete Development Approach 🛠️
+
+Instead of building all three MVC components at once, you'll tackle the problem in a specific order:
+1.  **Start with the View**: Create the HTML for the new page first. This allows you to focus on the design and layout of the post and comments before you worry about where the data comes from.
+2.  **Build a Simple Controller**: Create a new controller file (`post.php`) with "dummy" data to test your new view. This quick step confirms that your display is working correctly before you integrate with the database.
+3.  **Refine the Controller**: Make the controller dynamic. It will now read a specific post ID from the URL using a `GET` parameter. It will also prepare to call new functions in the Model to fetch the correct data.
+4.  **Implement the Model**: Finally, you'll create two new functions in your Model file (`src/model.php`): `getPost()` to retrieve a single post by its ID and `getComments()` to fetch all comments associated with that post ID.
+
+### The Power of Code Separation 💪
+
+This new feature requires adding more files to your project. You now have two controllers (`index.php` and `post.php`) and two views (`templates/homepage.php` and `templates/post.php`). The Model (`src/model.php`) is where all the data-handling logic is centralized, including a new function `dbConnect()` to connect to the database. This **refactoring** is a crucial step to avoid repeating the database connection code in every function.
+
+By separating your code this way, you create an application that is not only functional but also organized and maintainable. This structure allows you to build new features logically, file by file, while keeping your different components (data, logic, and display) neatly isolated.
