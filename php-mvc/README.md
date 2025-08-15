@@ -261,7 +261,6 @@ This simple structure immediately tells a developer that the files belong to the
 
 -----
 
----
 ## Chapter 11: Adding Comments
 
 Now that your blog is well-structured, it's time to add a new feature: a form for users to submit comments on a blog post. This chapter walks you through the complete process of adding this feature by applying the **Model-View-Controller (MVC)** pattern.
@@ -275,3 +274,31 @@ Adding a new feature to an MVC application follows a logical sequence:
 4.  **Implement the Model**: Finally, you create a new function in your model to save the comment to the database. The chapter also shows how to **refactor** your model by creating a separate `src/model/comment.php` file to contain all comment-related functions, further organizing your codebase by business logic.
 
 This full-cycle development process shows the power of MVC. Each component has a clear role: the **View** presents the form, the **Controller** validates the input, the **Router** directs the request, and the **Model** interacts with the database. After the data is successfully saved, the controller redirects the user back to the blog post page so they can see their new comment.
+
+-----
+
+## Chapter 12: Managing Errors 💾
+
+In programming, errors are a fact of life, but handling them gracefully is a mark of a well-designed application. While using nested `if/else` statements and `die()` functions might seem to work for error handling, this approach quickly leads to cluttered code that's difficult to maintain, especially when errors occur deep inside functions. A much more elegant solution is to use **exceptions**.
+
+-----
+
+### The Power of Exceptions ⚡
+
+An exception is a way to handle errors by interrupting the normal flow of your program and sending control to a dedicated error-handling block. This is done with three key keywords:
+
+* **`try`**: You wrap a section of code you want to "try" running inside this block.
+  ```php
+  try {
+     // Your code goes here
+  } catch (Exception $e) {
+     // This code runs only if an error occurs
+  }
+  ```
+* **`throw`**: You use this keyword to create and "throw" a new exception. This immediately stops the code in the `try` block and jumps to the nearest `catch` block.
+  ```php
+  throw new Exception('The error message you want to display.');
+  ```
+* **`catch`**: This block is responsible for "catching" the exception. It contains the code that runs when an error occurs, allowing you to handle it in one centralized place.
+
+The major benefit of exceptions is that they **propagate**. An exception thrown inside a deeply nested function call will "bubble up" through all the functions until it reaches the nearest `catch` block. This allows you to place a single `try/catch` block around your entire router, letting all errors—no matter where they happen—be handled in one centralized location. This makes your code cleaner and more organized, and it allows you to create a single, user-friendly error page for all types of issues.
