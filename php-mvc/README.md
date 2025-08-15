@@ -9,6 +9,17 @@
 ## Table of Contents
 
 - [Chapter 1 : Discovering Professional Code](#chapter-1--discovering-professional-code)
+- [Chapter 2 : Discovering the Limits of a Beginner's Code](#chapter-2--discovering-the-limits-of-a-beginners-code)
+- [Chapter 3 : Separating Display from PHP Processing](#chapter-3--separating-display-from-php-processing)
+- [Chapter 4 : Isolating Data Access](#chapter-4--isolating-data-access)
+- [Chapter 5 : Polishing Your Code's Cosmetics](#chapter-5--polishing-your-codes-cosmetics)
+- [Chapter 6 : Understanding the MVC Architecture](#chapter-6--understanding-the-mvc-architecture)
+- [Chapter 7 : Displaying Comments](#chapter-7--displaying-comments)
+- [Chapter 8 : Creating a Page Template](#chapter-8--creating-a-page-template)
+- [Chapter 9 : Creating a Router](#chapter-9--creating-a-router)
+- [Chapter 10 : Organizing into Directories](#chapter-10--organizing-into-directories)
+- [Chapter 11 : Adding Comments](#chapter-11--adding-comments)
+- [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
 
 ---
 
@@ -38,7 +49,7 @@ While you could jump straight to using a framework, it's highly recommended to f
 
 -----
 
-## Chapter 2: Discovering the Limits of a Beginner's Code
+## Chapter 2 : Discovering the Limits of a Beginner's Code
 
 In this chapter, you’ll dive into a real-world example of what makes code un-professional. Using a sample blog project, you'll see how a seemingly functional codebase can quickly become unmanageable. This exercise highlights the need to move beyond just writing code that "works" and start structuring it for future growth and collaboration.
 
@@ -58,7 +69,7 @@ This unstructured approach works for small, simple tasks. However, as soon as yo
 
 -----
 
-## Chapter 3: Separating Display from PHP Processing
+## Chapter 3 : Separating Display from PHP Processing
 
 As you move from writing beginner code to professional code, a crucial first step is to stop mixing your PHP logic with your HTML. This practice, known as **separation of concerns**, makes your code easier to read, maintain, and work on in a team. This chapter guides you through the process of refactoring a single-file application into a more modular structure.
 
@@ -82,7 +93,7 @@ The use of `require` is preferred over `include` because it will stop the script
 
 -----
 
-## Chapter 4: Isolating Data Access
+## Chapter 4 : Isolating Data Access
 
 In this chapter, you'll take the concept of code separation a step further by completely isolating your database and data-retrieval logic. This is the final step in building the foundation for a professional, modular application using the **Model-View-Controller (MVC)** architecture.
 
@@ -109,7 +120,7 @@ This new structure is a significant step forward. It allows different developers
 
 ---
 
-## Chapter 5: Polishing Your Code's Cosmetics
+## Chapter 5 : Polishing Your Code's Cosmetics
 
 This chapter focuses on several small but important improvements that make your code more professional and easier to maintain. These "cosmetic" changes involve updating your code to follow industry-standard practices, even though the application's functionality remains the same.
 
@@ -127,7 +138,7 @@ These changes are part of a refactoring process that focuses on improving the co
 
 -----
 
-## Chapter 6: Understanding the MVC Architecture
+## Chapter 6 : Understanding the MVC Architecture
 
 In the previous chapters, we started to build an application using a specific structure without knowing its name. This structure is a **design pattern**, a proven method for solving common programming problems. The one we've been using is one of the most famous: **MVC**, which stands for **Model-View-Controller**.
 
@@ -154,7 +165,7 @@ Although this structure seems more complex than a single-file script, it becomes
 
 -----
 
-## Chapter 7: Displaying Comments
+## Chapter 7 : Displaying Comments
 
 Now that your blog's core structure is in place, it's time to add a new feature: a dedicated page for each blog post and its comments. This chapter walks you through the process of adding this feature by applying your knowledge of the **Model-View-Controller (MVC)** architecture.
 
@@ -178,7 +189,7 @@ Thank you for the clarification. My apologies for the error. I will update the s
 
 -----
 
-## Chapter 8: Creating a Page Template
+## Chapter 8 : Creating a Page Template
 
 As your application grows, you'll find that certain parts of your HTML, such as the header and footer, are repeated across multiple pages. The most effective way to avoid this repetition and make your code more manageable is to create a **page template**, also known as a **layout**.
 
@@ -212,7 +223,7 @@ This method allows you to easily create new pages without rewriting the same HTM
 
 -----
 
-## Chapter 9: Creating a Router
+## Chapter 9 : Creating a Router
 
 In a simple application, you might use separate files like `index.php` and `post.php` to handle different pages. However, this approach quickly becomes messy and difficult to manage as you add more features. A professional solution is to use a single entry point, known as a **front controller** or **router**.
 
@@ -238,7 +249,7 @@ By using this approach, you centralize your application's logic and make it far 
 
 -----
 
-## Chapter 10: Organizing into Directories 💾
+## Chapter 10 : Organizing into Directories
 
 As your application grows and you add new pages and features, your folders will quickly become cluttered with a large number of files. While a flat file structure might work at the beginning, it's not a sustainable or professional way to build a project. This chapter explains how to organize your code into a logical directory structure based on the application's different features, or **business notions**.
 
@@ -261,7 +272,7 @@ This simple structure immediately tells a developer that the files belong to the
 
 -----
 
-## Chapter 11: Adding Comments
+## Chapter 11 : Adding Comments
 
 Now that your blog is well-structured, it's time to add a new feature: a form for users to submit comments on a blog post. This chapter walks you through the complete process of adding this feature by applying the **Model-View-Controller (MVC)** pattern.
 
@@ -277,7 +288,7 @@ This full-cycle development process shows the power of MVC. Each component has a
 
 -----
 
-## Chapter 12: Managing Errors 💾
+## Chapter 12 : Managing Errors
 
 In programming, errors are a fact of life, but handling them gracefully is a mark of a well-designed application. While using nested `if/else` statements and `die()` functions might seem to work for error handling, this approach quickly leads to cluttered code that's difficult to maintain, especially when errors occur deep inside functions. A much more elegant solution is to use **exceptions**.
 
