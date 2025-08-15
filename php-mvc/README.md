@@ -258,3 +258,20 @@ To keep your code organized, the best practice is to group related files (contro
 * `templates/front/contact.php`
 
 This simple structure immediately tells a developer that the files belong to the `front` section of the site and relate to a specific business feature: `contact`. By following this logic, your codebase becomes much easier to navigate and maintain, especially as you add more features.
+
+-----
+
+---
+## Chapter 11: Adding Comments
+
+Now that your blog is well-structured, it's time to add a new feature: a form for users to submit comments on a blog post. This chapter walks you through the complete process of adding this feature by applying the **Model-View-Controller (MVC)** pattern.
+
+### The Development Process 🏗️
+
+Adding a new feature to an MVC application follows a logical sequence:
+1.  **Modify the View**: First, you update the `templates/post.php` view file to include an HTML form. This form contains fields for the author's name and the comment, and its `action` attribute is set to a new URL that will be handled by a dedicated controller.
+2.  **Create a New Controller**: You create a new controller function, `addComment()`, in a new file, `src/controllers/add_comment.php`. This controller's job is to handle the data submitted by the form. It's responsible for **validating** the user's input to make sure it's not empty or invalid.
+3.  **Update the Router**: The central router (`index.php`) needs to be updated with a new `elseif` block to recognize the `addComment` action from the form's URL. Once recognized, the router calls the new `addComment()` controller and passes it the user-submitted data.
+4.  **Implement the Model**: Finally, you create a new function in your model to save the comment to the database. The chapter also shows how to **refactor** your model by creating a separate `src/model/comment.php` file to contain all comment-related functions, further organizing your codebase by business logic.
+
+This full-cycle development process shows the power of MVC. Each component has a clear role: the **View** presents the form, the **Controller** validates the input, the **Router** directs the request, and the **Model** interacts with the database. After the data is successfully saved, the controller redirects the user back to the blog post page so they can see their new comment.
