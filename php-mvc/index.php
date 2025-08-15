@@ -1,7 +1,38 @@
 <?php
+// index.php
 
-require('src/model.php');
+require_once('src/controllers/add_comment.php');
+require_once('src/controllers/homepage.php');
+require_once('src/controllers/post.php');
 
-$posts = getPosts();
+try {
+    if (isset($_GET['action']) && $_GET['action'] !== '') {
+        if ($_GET['action'] === 'post') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $identifier = $_GET['id'];
 
-require('templates/homepage.php');
+                post($identifier);
+            } else {
+                throw new Exception('Erreur : aucun identifiant de billet envoyé');
+
+                die;
+            }
+        } elseif ($_GET['action'] === 'addComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $identifier = $_GET['id'];
+
+                addComment($identifier, $_POST);
+            } else {
+                throw new Exception('Erreur : aucun identifiant de billet envoyé');
+
+                die;
+            }
+        } else {
+            throw new Exception("Erreur 404 : la page que vous recherchez n'existe pas.");
+        }
+    } else {
+        homepage();
+    }
+} catch (Exception $e) {
+    echo '[ERROR] index.php :' . $e->getMessage();
+}

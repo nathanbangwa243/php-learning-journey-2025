@@ -9,6 +9,17 @@
 ## Table of Contents
 
 - [Chapter 1 : Discovering Professional Code](#chapter-1--discovering-professional-code)
+- [Chapter 2 : Discovering the Limits of a Beginner's Code](#chapter-2--discovering-the-limits-of-a-beginners-code)
+- [Chapter 3 : Separating Display from PHP Processing](#chapter-3--separating-display-from-php-processing)
+- [Chapter 4 : Isolating Data Access](#chapter-4--isolating-data-access)
+- [Chapter 5 : Polishing Your Code's Cosmetics](#chapter-5--polishing-your-codes-cosmetics)
+- [Chapter 6 : Understanding the MVC Architecture](#chapter-6--understanding-the-mvc-architecture)
+- [Chapter 7 : Displaying Comments](#chapter-7--displaying-comments)
+- [Chapter 8 : Creating a Page Template](#chapter-8--creating-a-page-template)
+- [Chapter 9 : Creating a Router](#chapter-9--creating-a-router)
+- [Chapter 10 : Organizing into Directories](#chapter-10--organizing-into-directories)
+- [Chapter 11 : Adding Comments](#chapter-11--adding-comments)
+- [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
 
 ---
 
@@ -38,7 +49,7 @@ While you could jump straight to using a framework, it's highly recommended to f
 
 -----
 
-## Chapter 2: Discovering the Limits of a Beginner's Code
+## Chapter 2 : Discovering the Limits of a Beginner's Code
 
 In this chapter, you’ll dive into a real-world example of what makes code un-professional. Using a sample blog project, you'll see how a seemingly functional codebase can quickly become unmanageable. This exercise highlights the need to move beyond just writing code that "works" and start structuring it for future growth and collaboration.
 
@@ -58,7 +69,7 @@ This unstructured approach works for small, simple tasks. However, as soon as yo
 
 -----
 
-## Chapter 3: Separating Display from PHP Processing
+## Chapter 3 : Separating Display from PHP Processing
 
 As you move from writing beginner code to professional code, a crucial first step is to stop mixing your PHP logic with your HTML. This practice, known as **separation of concerns**, makes your code easier to read, maintain, and work on in a team. This chapter guides you through the process of refactoring a single-file application into a more modular structure.
 
@@ -82,7 +93,7 @@ The use of `require` is preferred over `include` because it will stop the script
 
 -----
 
-## Chapter 4: Isolating Data Access
+## Chapter 4 : Isolating Data Access
 
 In this chapter, you'll take the concept of code separation a step further by completely isolating your database and data-retrieval logic. This is the final step in building the foundation for a professional, modular application using the **Model-View-Controller (MVC)** architecture.
 
@@ -109,7 +120,7 @@ This new structure is a significant step forward. It allows different developers
 
 ---
 
-## Chapter 5: Polishing Your Code's Cosmetics
+## Chapter 5 : Polishing Your Code's Cosmetics
 
 This chapter focuses on several small but important improvements that make your code more professional and easier to maintain. These "cosmetic" changes involve updating your code to follow industry-standard practices, even though the application's functionality remains the same.
 
@@ -124,3 +135,181 @@ You'll make three key changes to improve the quality of your code:
 * **Adopt Short Echo Tags**: In your HTML templates (`templates/homepage.php`), you can use the short echo tag `<?= ` as a shortcut for `<?php echo `. This makes your templates cleaner and more readable by reducing the amount of PHP syntax needed to display a variable.
 
 These changes are part of a refactoring process that focuses on improving the code's quality without adding new features. By applying these standards, you align your project with professional conventions and make it more robust and maintainable in the long run.
+
+-----
+
+## Chapter 6 : Understanding the MVC Architecture
+
+In the previous chapters, we started to build an application using a specific structure without knowing its name. This structure is a **design pattern**, a proven method for solving common programming problems. The one we've been using is one of the most famous: **MVC**, which stands for **Model-View-Controller**.
+
+The MVC pattern is a way to organize your code into three distinct parts, each with its own role, to make your application more manageable and scalable.
+
+### The Three Pillars of MVC 🏛️
+
+* **Model**: This part handles the **business logic** and data. Its job is to manage the data's state, perform complex calculations, and interact with the database. When the Model is asked for information, it retrieves it and provides it to the Controller without worrying about how it will be presented.
+* **View**: The View is all about presentation. It contains the HTML, along with simple PHP code for things like loops and conditions, to display the information it receives. The View's sole purpose is to format and render data; it never talks to the database.
+* **Controller**: The Controller is the **orchestrator** of the application. It receives requests from the user, decides which Model functions to call, and passes the results to the correct View. It acts as the intermediary, connecting the user's request to the appropriate data and display.
+
+### How Information Flows in MVC 🔄
+
+The flow of information in an MVC application is a one-way street, with the Controller at the center.
+
+
+1.  A user's request (e.g., visiting a specific URL) is received by the **Controller**.
+2.  The Controller asks the **Model** to perform a task, such as fetching a list of blog posts.
+3.  The Model retrieves the data from the database and returns it to the Controller.
+4.  The Controller then gives this data to the **View**.
+5.  The View uses the data to generate an HTML page, which the Controller sends back to the user's browser.
+
+Although this structure seems more complex than a single-file script, it becomes indispensable as a project grows. It makes the code easier to read, maintain, and expand, allowing multiple developers to work on different parts of the application without stepping on each other's toes.
+
+-----
+
+## Chapter 7 : Displaying Comments
+
+Now that your blog's core structure is in place, it's time to add a new feature: a dedicated page for each blog post and its comments. This chapter walks you through the process of adding this feature by applying your knowledge of the **Model-View-Controller (MVC)** architecture.
+
+### A Concrete Development Approach 🛠️
+
+Instead of building all three MVC components at once, you'll tackle the problem in a specific order:
+1.  **Start with the View**: Create the HTML for the new page first. This allows you to focus on the design and layout of the post and comments before you worry about where the data comes from.
+2.  **Build a Simple Controller**: Create a new controller file (`post.php`) with "dummy" data to test your new view. This quick step confirms that your display is working correctly before you integrate with the database.
+3.  **Refine the Controller**: Make the controller dynamic. It will now read a specific post ID from the URL using a `GET` parameter. It will also prepare to call new functions in the Model to fetch the correct data.
+4.  **Implement the Model**: Finally, you'll create two new functions in your Model file (`src/model.php`): `getPost()` to retrieve a single post by its ID and `getComments()` to fetch all comments associated with that post ID.
+
+### The Power of Code Separation 💪
+
+This new feature requires adding more files to your project. You now have two controllers (`index.php` and `post.php`) and two views (`templates/homepage.php` and `templates/post.php`). The Model (`src/model.php`) is where all the data-handling logic is centralized, including a new function `dbConnect()` to connect to the database. This **refactoring** is a crucial step to avoid repeating the database connection code in every function.
+
+By separating your code this way, you create an application that is not only functional but also organized and maintainable. This structure allows you to build new features logically, file by file, while keeping your different components (data, logic, and display) neatly isolated.
+
+-----
+
+Thank you for the clarification. My apologies for the error. I will update the summary to reflect the correct chapter number.
+
+-----
+
+## Chapter 8 : Creating a Page Template
+
+As your application grows, you'll find that certain parts of your HTML, such as the header and footer, are repeated across multiple pages. The most effective way to avoid this repetition and make your code more manageable is to create a **page template**, also known as a **layout**.
+
+### The Problem with Simple Includes ❌
+
+While you could simply use `require('header.php')` and `require('footer.php')` in each of your view files, this approach has a major drawback. It becomes very difficult to customize page-specific elements like the `<title>` tag or a page's menu, because they are hardcoded inside the included files. A more flexible approach is needed to define these elements from within your page's unique content.
+
+### The Solution: A Flexible Layout 🧩
+
+Instead of injecting small pieces of code into a full page, you reverse the process. You create a single **layout file** that contains the entire page structure, with placeholders for content that changes.
+
+For example, a layout file could have placeholders for the page's title and its main content:
+
+```html
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title><?= $title ?></title>
+      <link href="style.css" rel="stylesheet" /> 
+   </head>
+   <body>
+      <?= $content ?>
+   </body>
+</html>
+```
+
+Your individual view files then define these variables (`$title` and `$content`) and include the layout file at the end. To define the main body content, you use a technique called **output buffering**. PHP functions like `ob_start()` and `ob_get_clean()` "memorize" all the HTML output that follows them, capture it into a variable, and then give you a way to insert that into the layout.
+
+This method allows you to easily create new pages without rewriting the same HTML structure, making your entire application more efficient and easier to update.
+
+-----
+
+## Chapter 9 : Creating a Router
+
+In a simple application, you might use separate files like `index.php` and `post.php` to handle different pages. However, this approach quickly becomes messy and difficult to manage as you add more features. A professional solution is to use a single entry point, known as a **front controller** or **router**.
+
+---
+
+### The Router's Role 🛣️
+
+The router's job is to act as the main gateway for all requests to your application. Instead of creating a new PHP file for every page, you create one central `index.php` file. This file then uses a parameter in the URL, such as `?action=post`, to decide which specific code to run.
+
+To make this work, you take your old `index.php` and `post.php` files and turn them into functions within a new `src/controllers/` directory. Each controller file now acts as a code library, containing a function (like `homepage()` or `post()`) that the router can call.
+
+---
+
+### How the New Structure Works ⚙️
+
+Your new `index.php` file is now much smarter. It:
+
+1.  **Includes Controller Files**: It uses `require_once` to load all your controller functions into memory. The `_once` part is crucial because it prevents errors by ensuring each file is included only one time.
+2.  **Checks the URL**: It looks for a specific parameter, `$_GET['action']`, in the URL.
+3.  **Calls the Right Controller**: Based on the value of `action`, it calls the corresponding controller function. For example, if the URL is `index.php?action=post`, the router will call the `post()` function.
+
+By using this approach, you centralize your application's logic and make it far easier to maintain. When you need to add a new page or feature, you simply add a new controller function and a new rule to your router, without cluttering your main project directory.
+
+-----
+
+## Chapter 10 : Organizing into Directories
+
+As your application grows and you add new pages and features, your folders will quickly become cluttered with a large number of files. While a flat file structure might work at the beginning, it's not a sustainable or professional way to build a project. This chapter explains how to organize your code into a logical directory structure based on the application's different features, or **business notions**.
+
+---
+
+### Understanding "Business Notions" 🏢
+
+In programming, there's a key distinction between **technical notions** and **business notions**. Technical notions are concepts related to the underlying technology, like a database connection or a routing system. They are often invisible to the end user. In contrast, business notions are the features and concepts that a client or user would talk about, such as a "contact form," "blog posts," or an "admin dashboard."
+
+---
+
+### Grouping Code by Business Section 📁
+
+To keep your code organized, the best practice is to group related files (controllers, views, and models) into subdirectories that reflect these business notions. For example, if you were to add a contact form to the user-facing part of your blog, you wouldn't just create a `contact.php` file in a top-level directory. Instead, you would create a clear directory structure like this:
+
+* `src/controllers/front/contact.php`
+* `templates/front/contact.php`
+
+This simple structure immediately tells a developer that the files belong to the `front` section of the site and relate to a specific business feature: `contact`. By following this logic, your codebase becomes much easier to navigate and maintain, especially as you add more features.
+
+-----
+
+## Chapter 11 : Adding Comments
+
+Now that your blog is well-structured, it's time to add a new feature: a form for users to submit comments on a blog post. This chapter walks you through the complete process of adding this feature by applying the **Model-View-Controller (MVC)** pattern.
+
+### The Development Process 🏗️
+
+Adding a new feature to an MVC application follows a logical sequence:
+1.  **Modify the View**: First, you update the `templates/post.php` view file to include an HTML form. This form contains fields for the author's name and the comment, and its `action` attribute is set to a new URL that will be handled by a dedicated controller.
+2.  **Create a New Controller**: You create a new controller function, `addComment()`, in a new file, `src/controllers/add_comment.php`. This controller's job is to handle the data submitted by the form. It's responsible for **validating** the user's input to make sure it's not empty or invalid.
+3.  **Update the Router**: The central router (`index.php`) needs to be updated with a new `elseif` block to recognize the `addComment` action from the form's URL. Once recognized, the router calls the new `addComment()` controller and passes it the user-submitted data.
+4.  **Implement the Model**: Finally, you create a new function in your model to save the comment to the database. The chapter also shows how to **refactor** your model by creating a separate `src/model/comment.php` file to contain all comment-related functions, further organizing your codebase by business logic.
+
+This full-cycle development process shows the power of MVC. Each component has a clear role: the **View** presents the form, the **Controller** validates the input, the **Router** directs the request, and the **Model** interacts with the database. After the data is successfully saved, the controller redirects the user back to the blog post page so they can see their new comment.
+
+-----
+
+## Chapter 12 : Managing Errors
+
+In programming, errors are a fact of life, but handling them gracefully is a mark of a well-designed application. While using nested `if/else` statements and `die()` functions might seem to work for error handling, this approach quickly leads to cluttered code that's difficult to maintain, especially when errors occur deep inside functions. A much more elegant solution is to use **exceptions**.
+
+-----
+
+### The Power of Exceptions ⚡
+
+An exception is a way to handle errors by interrupting the normal flow of your program and sending control to a dedicated error-handling block. This is done with three key keywords:
+
+* **`try`**: You wrap a section of code you want to "try" running inside this block.
+  ```php
+  try {
+     // Your code goes here
+  } catch (Exception $e) {
+     // This code runs only if an error occurs
+  }
+  ```
+* **`throw`**: You use this keyword to create and "throw" a new exception. This immediately stops the code in the `try` block and jumps to the nearest `catch` block.
+  ```php
+  throw new Exception('The error message you want to display.');
+  ```
+* **`catch`**: This block is responsible for "catching" the exception. It contains the code that runs when an error occurs, allowing you to handle it in one centralized place.
+
+The major benefit of exceptions is that they **propagate**. An exception thrown inside a deeply nested function call will "bubble up" through all the functions until it reaches the nearest `catch` block. This allows you to place a single `try/catch` block around your entire router, letting all errors—no matter where they happen—be handled in one centralized location. This makes your code cleaner and more organized, and it allows you to create a single, user-friendly error page for all types of issues.
