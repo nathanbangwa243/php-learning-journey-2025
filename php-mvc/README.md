@@ -20,7 +20,8 @@
 - [Chapter 10 : Organizing into Directories](#chapter-10--organizing-into-directories)
 - [Chapter 11 : Adding Comments](#chapter-11--adding-comments)
 - [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
-
+- [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
+  
 ---
 
 ## Chapter 1 : Discovering Professional Code
@@ -313,3 +314,41 @@ An exception is a way to handle errors by interrupting the normal flow of your p
 * **`catch`**: This block is responsible for "catching" the exception. It contains the code that runs when an error occurs, allowing you to handle it in one centralized place.
 
 The major benefit of exceptions is that they **propagate**. An exception thrown inside a deeply nested function call will "bubble up" through all the functions until it reaches the nearest `catch` block. This allows you to place a single `try/catch` block around your entire router, letting all errors—no matter where they happen—be handled in one centralized location. This makes your code cleaner and more organized, and it allows you to create a single, user-friendly error page for all types of issues.
+
+-----
+
+## Chapter 13 : Structuring Your Data
+
+Up to this point, your code's different layers (Model, View, and Controller) have communicated using simple variables and arrays. While this works, it relies on implicit agreements and informal documentation, which can lead to errors and make code difficult to maintain. The solution is to create your own custom data structures using **Object-Oriented Programming (OOP)**.
+
+-----
+
+### The Blueprint and the Object 🧱
+
+In OOP, you can define a blueprint for a new data type, which is called a **class**. A class contains all the individual pieces of data, called **properties**, that belong together. For example, you can create a `Comment` class that contains three properties: `$author`, `$frenchCreationDate`, and `$comment`. This provides a clear, documented structure for what a comment is.
+
+Once you have a class, you can create a variable of that type. This process is called **instantiating a class**, and the result is an **object**. The `new` keyword is used to create a new object from a class.
+
+```php
+class Comment
+{
+    public string $author;
+    public string $frenchCreationDate;
+    public string $comment;
+}
+$comment = new Comment(); // Creates a new object
+```
+
+### The Benefits of Strict Code 🧑‍💻
+
+By creating your own data types, you make your code more robust and self-documenting. PHP can now automatically verify that a variable contains the data you expect. You access an object's properties using the **arrow operator (`->`)**, which replaces the old array syntax.
+
+```php
+// Old way
+$comment['author']
+
+// New, object-oriented way
+$comment->author
+```
+
+This change is applied to the `getComments()` model function, which now returns an array of `Comment` objects instead of an array of associative arrays. Your view is also updated to use the new object syntax. By using classes, you ensure that the data passed between your MVC layers is structured and consistent, making the entire application easier to read and less prone to bugs.
