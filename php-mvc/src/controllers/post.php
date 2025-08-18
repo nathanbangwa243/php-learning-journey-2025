@@ -1,5 +1,4 @@
 <?php
-// src/controllers/post.php
 
 require_once('src/model.php');
 require_once('src/model/comment.php');
