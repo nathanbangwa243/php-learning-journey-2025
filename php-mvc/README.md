@@ -21,6 +21,7 @@
 - [Chapter 11 : Adding Comments](#chapter-11--adding-comments)
 - [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
 - [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
+- [Chapter 14 : Giving Your Structures a Life of Their Own](#chapter-14--giving-your-structures-a-life-of-their-own)
   
 ---
 
@@ -352,3 +353,53 @@ $comment->author
 ```
 
 This change is applied to the `getComments()` model function, which now returns an array of `Comment` objects instead of an array of associative arrays. Your view is also updated to use the new object syntax. By using classes, you ensure that the data passed between your MVC layers is structured and consistent, making the entire application easier to read and less prone to bugs.
+
+-----
+
+## Chapter 14 : Giving Your Structures a Life of Their Own
+
+In a well-structured application, you should avoid heavy, repetitive operations like creating a new database connection every time you need to retrieve data. This chapter shows how to solve that problem by giving your data structures (**classes**) the ability to perform actions on their own.
+
+-----
+
+### From Passive Data to Active Objects ⚙️
+
+While a **class** can hold data, it can also contain functions called **methods**. These methods are like built-in abilities that allow an object to manage its own data and perform tasks.
+
+For example, you can create a `PostRepository` class that contains a property to hold the database connection.
+
+```php
+class PostRepository
+{
+    public ?PDO $database = null;
+    // ... methods go here
+}
+```
+
+By defining methods inside your class, you can tell the object to perform an action, such as connecting to the database. When a method is called on an object, it has access to a special variable called `$this`, which represents that specific object instance. This allows the object to manage its own state, like its database connection, without needing to pass it around.
+
+```php
+public function dbConnect()
+{
+    if ($this->database === null) {
+        $this->database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'blog', 'password');
+    }
+}
+```
+
+### An Autonomous Model 🧠
+
+This new approach refactors the data retrieval logic into methods within the `PostRepository` class. The result is a self-contained model. Your controllers now only need to:
+
+1.  Create a single `PostRepository` object.
+2.  Ask this object for data by calling one of its methods.
+
+<!-- end list -->
+
+```php
+// In the controller
+$postRepository = new PostRepository();
+$posts = $postRepository->getPosts();
+```
+
+This pattern makes the model **autonomous**. Each `PostRepository` object is an independent unit that can manage its own database connection and data retrieval logic. Your controllers now only need to interact with a single object to get the data they need, making the overall codebase cleaner, more efficient, and easier to maintain
