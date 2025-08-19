@@ -1,6 +1,10 @@
 <?php
+namespace Application\Model\Comment;
 
 require_once('src/lib/database.php');
+
+use Application\Lib\Database\DatabaseConnection;
+
 
 class Comment
 {
@@ -8,6 +12,7 @@ class Comment
     public string $frenchCreationDate;
     public string $comment;
 }
+
 
 class CommentRepository
 {
@@ -33,7 +38,7 @@ class CommentRepository
         return $comments;
     }
 
-    public function createComment(string $post, string $author, string $comment)
+    public function createComment(string $post, string $author, string $comment) : bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())'

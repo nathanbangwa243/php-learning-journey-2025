@@ -23,7 +23,8 @@
 - [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
 - [Chapter 14 : Giving Your Structures a Life of Their Own](#chapter-14--giving-your-structures-a-life-of-their-own)
 - [Chapter 15 : Leveraging Composition](#chapter-15--leveraging-composition)
-  
+- [Chapter 16: Using Namespaces](#chapter-16--using-namespaces)
+
 ---
 
 ## Chapter 1 : Discovering Professional Code
@@ -444,3 +445,43 @@ $this->connection->getConnection()->prepare(...)
 ```
 
 This makes the code cleaner and more flexible. The controller can now create a single `DatabaseConnection` object and pass it to both the `PostRepository` and `CommentRepository` instances. As a result, both models share the exact same connection, solving the issue of multiple redundant connections and making the entire application more efficient.
+
+-----
+
+## Chapter 16 : Using Namespaces
+
+As applications grow and you begin to use code from multiple sources, you risk a common problem: **naming collisions**. This happens when two different classes in your project have the exact same name, which will cause your program to fail. To solve this, professional developers use a system called **namespaces**.
+
+-----
+
+### Virtual Folders for Your Code 📁
+
+A **namespace** acts like a virtual folder for your classes and functions. It allows you to have two classes with the same name, as long as they are organized into different namespaces. The structure of a namespace often mirrors the project's directory structure, such as `Application\Model\Post`.
+
+You declare a namespace at the top of a file using the `namespace` keyword. Once you do this, every class and function in that file belongs to that namespace, and its full name includes the namespace prefix.
+
+```php
+// In a file called PostRepository.php
+namespace Application\Model\Post;
+
+class PostRepository { /* ... */ }
+
+// The class's full name is now `Application\Model\Post\PostRepository`
+```
+
+-----
+
+### Avoiding Repetition ✍️
+
+Having to write the full, long namespace every time you use a class would be tedious. To avoid this, you can use the **`use`** keyword at the top of a file. The `use` statement works like a shortcut, allowing you to reference a class by its short name while still pointing to its full location.
+
+For example, a controller file can include the following line to easily access the repository class:
+
+```php
+use Application\Model\Post\PostRepository;
+
+// Now you can simply write this:
+$postRepository = new PostRepository();
+```
+
+Using namespaces is a best practice that prevents naming conflicts and makes your code more organized and readable, especially for large projects with many different components.

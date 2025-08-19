@@ -1,8 +1,22 @@
 <?php
 
-require_once('src/controllers/add_comment.php');
+require_once('src/controllers/comment.php');
 require_once('src/controllers/homepage.php');
 require_once('src/controllers/post.php');
+
+use Application\Controllers\Comment\CommentController;
+use Application\Controllers\Post\PostController;
+use Application\Controllers\HomePage\HomePageController;
+
+// HOMEPAGE
+$homepageController = new HomePageController();
+
+// POST
+$postController = new PostController();
+
+// COMMENT
+$commentController = new CommentController();
+
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -10,7 +24,7 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                post($identifier);
+                $postController->post($identifier);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -18,7 +32,7 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                addComment($identifier, $_POST);
+                $commentController->addComment($identifier, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -26,7 +40,7 @@ try {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
     } else {
-        homepage();
+        $homepageController->homepage();
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
