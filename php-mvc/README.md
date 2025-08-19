@@ -23,8 +23,9 @@
 - [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
 - [Chapter 14 : Giving Your Structures a Life of Their Own](#chapter-14--giving-your-structures-a-life-of-their-own)
 - [Chapter 15 : Leveraging Composition](#chapter-15--leveraging-composition)
-- [Chapter 16: Using Namespaces](#chapter-16--using-namespaces)
-
+- [Chapter 16 : Using Namespaces](#chapter-16--using-namespaces)
+- [Chapter 17 : Practice Modify a Comment](#chapter-17--practice-modify-a-comment)
+  
 ---
 
 ## Chapter 1 : Discovering Professional Code
@@ -485,3 +486,21 @@ $postRepository = new PostRepository();
 ```
 
 Using namespaces is a best practice that prevents naming conflicts and makes your code more organized and readable, especially for large projects with many different components.
+
+-----
+
+## Chapter 17 : Practice Modify a Comment
+
+This chapter is a hands-on exercise designed to help you apply all the key principles you've learned so far. Your mission is to add a new feature to the blog: the ability for any user to modify any comment.
+
+---
+
+### Your Mission 🎯
+
+You'll need to create a new page where users can edit a comment, accessible via a "modify" link next to each comment. As you build this feature, you must respect all the professional practices covered in this course:
+
+* **Follow the MVC Pattern:** Separate your code into distinct Model, View, and Controller layers, ensuring each part has a single responsibility.
+* **Use Object-Oriented Programming:** The data must be handled using classes and objects, as you learned in the previous chapters.
+* **Organize with Namespaces:** Ensure all your new classes are placed within the proper namespaces.
+
+The focus of this exercise is purely on applying the correct code structure, so you don't need to worry about user permissions or security for this task. Once you're done, you can double-check your work to ensure your new feature is functional and correctly integrated into the application's structure.
