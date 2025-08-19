@@ -13,7 +13,10 @@ function addComment(string $post, array $input)
         throw new Exception('Les données du formulaire sont invalides.');
     }
 
-    $success = createComment($post, $author, $comment);
+    $commentRepository = new CommentRepository();
+    $commentRepository->connection = new DatabaseConnection();
+
+    $success = $commentRepository->createComment($post, $author, $comment);
     if (!$success) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
     } else {

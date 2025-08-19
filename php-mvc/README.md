@@ -22,6 +22,7 @@
 - [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
 - [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
 - [Chapter 14 : Giving Your Structures a Life of Their Own](#chapter-14--giving-your-structures-a-life-of-their-own)
+- [Chapter 15 : Leveraging Composition](#chapter-15--leveraging-composition)
   
 ---
 
@@ -403,3 +404,43 @@ $posts = $postRepository->getPosts();
 ```
 
 This pattern makes the model **autonomous**. Each `PostRepository` object is an independent unit that can manage its own database connection and data retrieval logic. Your controllers now only need to interact with a single object to get the data they need, making the overall codebase cleaner, more efficient, and easier to maintain
+
+-----
+
+## Chapter 15 : Leveraging Composition
+
+Even after our previous changes, a common issue remains: a new database connection is created for each different model (`PostRepository` and `CommentRepository`), which is an inefficient use of resources. This chapter introduces **composition**, a key principle of object-oriented programming that solves this problem by allowing objects to work together.
+
+-----
+
+### Building with Objects 🏗️
+
+Composition is the practice of building a new object by using other objects as its properties. Instead of each model knowing how to connect to the database, we can create a dedicated object whose single responsibility is to manage the connection.
+
+First, a new class called `DatabaseConnection` is created. This class has one job: to provide a single, reusable connection to the database. It contains a method, `getConnection()`, which handles the logic of creating the connection only once.
+
+```php
+class DatabaseConnection
+{
+    public function getConnection(): PDO
+    {
+        // ... returns connection, creating it if it doesn't exist
+    }
+}
+```
+
+### Delegating Responsibility 🤝
+
+Next, the `PostRepository` class is refactored. Instead of containing its own `dbConnect()` method and a `PDO` property, it now has a property of type `DatabaseConnection`. This means the repository **delegates** the responsibility of connecting to the new object.
+
+The repository's methods now simply ask the `DatabaseConnection` object for the active connection.
+
+```php
+// Old way
+$this->database->prepare(...)
+
+// New, composed way
+$this->connection->getConnection()->prepare(...)
+```
+
+This makes the code cleaner and more flexible. The controller can now create a single `DatabaseConnection` object and pass it to both the `PostRepository` and `CommentRepository` instances. As a result, both models share the exact same connection, solving the issue of multiple redundant connections and making the entire application more efficient.
