@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Lib\Database;
+namespace Application\Lib\DatabaseConnection;
 
 class DatabaseConnection
 {
