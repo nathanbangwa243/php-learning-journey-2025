@@ -20,7 +20,13 @@
 - [Chapter 10 : Organizing into Directories](#chapter-10--organizing-into-directories)
 - [Chapter 11 : Adding Comments](#chapter-11--adding-comments)
 - [Chapter 12 : Managing Errors](#chapter-12--managing-errors)
-
+- [Chapter 13 : Structuring Your Data](#chapter-13--structuring-your-data)
+- [Chapter 14 : Giving Your Structures a Life of Their Own](#chapter-14--giving-your-structures-a-life-of-their-own)
+- [Chapter 15 : Leveraging Composition](#chapter-15--leveraging-composition)
+- [Chapter 16 : Using Namespaces](#chapter-16--using-namespaces)
+- [Chapter 17 : Practice Modify a Comment](#chapter-17--practice-modify-a-comment)
+- [Chapter 18 : Going Further](#chapter-18--going-further)
+  
 ---
 
 ## Chapter 1 : Discovering Professional Code
@@ -313,3 +319,209 @@ An exception is a way to handle errors by interrupting the normal flow of your p
 * **`catch`**: This block is responsible for "catching" the exception. It contains the code that runs when an error occurs, allowing you to handle it in one centralized place.
 
 The major benefit of exceptions is that they **propagate**. An exception thrown inside a deeply nested function call will "bubble up" through all the functions until it reaches the nearest `catch` block. This allows you to place a single `try/catch` block around your entire router, letting all errors—no matter where they happen—be handled in one centralized location. This makes your code cleaner and more organized, and it allows you to create a single, user-friendly error page for all types of issues.
+
+-----
+
+## Chapter 13 : Structuring Your Data
+
+Up to this point, your code's different layers (Model, View, and Controller) have communicated using simple variables and arrays. While this works, it relies on implicit agreements and informal documentation, which can lead to errors and make code difficult to maintain. The solution is to create your own custom data structures using **Object-Oriented Programming (OOP)**.
+
+-----
+
+### The Blueprint and the Object 🧱
+
+In OOP, you can define a blueprint for a new data type, which is called a **class**. A class contains all the individual pieces of data, called **properties**, that belong together. For example, you can create a `Comment` class that contains three properties: `$author`, `$frenchCreationDate`, and `$comment`. This provides a clear, documented structure for what a comment is.
+
+Once you have a class, you can create a variable of that type. This process is called **instantiating a class**, and the result is an **object**. The `new` keyword is used to create a new object from a class.
+
+```php
+class Comment
+{
+    public string $author;
+    public string $frenchCreationDate;
+    public string $comment;
+}
+$comment = new Comment(); // Creates a new object
+```
+
+### The Benefits of Strict Code 🧑‍💻
+
+By creating your own data types, you make your code more robust and self-documenting. PHP can now automatically verify that a variable contains the data you expect. You access an object's properties using the **arrow operator (`->`)**, which replaces the old array syntax.
+
+```php
+// Old way
+$comment['author']
+
+// New, object-oriented way
+$comment->author
+```
+
+This change is applied to the `getComments()` model function, which now returns an array of `Comment` objects instead of an array of associative arrays. Your view is also updated to use the new object syntax. By using classes, you ensure that the data passed between your MVC layers is structured and consistent, making the entire application easier to read and less prone to bugs.
+
+-----
+
+## Chapter 14 : Giving Your Structures a Life of Their Own
+
+In a well-structured application, you should avoid heavy, repetitive operations like creating a new database connection every time you need to retrieve data. This chapter shows how to solve that problem by giving your data structures (**classes**) the ability to perform actions on their own.
+
+-----
+
+### From Passive Data to Active Objects ⚙️
+
+While a **class** can hold data, it can also contain functions called **methods**. These methods are like built-in abilities that allow an object to manage its own data and perform tasks.
+
+For example, you can create a `PostRepository` class that contains a property to hold the database connection.
+
+```php
+class PostRepository
+{
+    public ?PDO $database = null;
+    // ... methods go here
+}
+```
+
+By defining methods inside your class, you can tell the object to perform an action, such as connecting to the database. When a method is called on an object, it has access to a special variable called `$this`, which represents that specific object instance. This allows the object to manage its own state, like its database connection, without needing to pass it around.
+
+```php
+public function dbConnect()
+{
+    if ($this->database === null) {
+        $this->database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'blog', 'password');
+    }
+}
+```
+
+### An Autonomous Model 🧠
+
+This new approach refactors the data retrieval logic into methods within the `PostRepository` class. The result is a self-contained model. Your controllers now only need to:
+
+1.  Create a single `PostRepository` object.
+2.  Ask this object for data by calling one of its methods.
+
+<!-- end list -->
+
+```php
+// In the controller
+$postRepository = new PostRepository();
+$posts = $postRepository->getPosts();
+```
+
+This pattern makes the model **autonomous**. Each `PostRepository` object is an independent unit that can manage its own database connection and data retrieval logic. Your controllers now only need to interact with a single object to get the data they need, making the overall codebase cleaner, more efficient, and easier to maintain
+
+-----
+
+## Chapter 15 : Leveraging Composition
+
+Even after our previous changes, a common issue remains: a new database connection is created for each different model (`PostRepository` and `CommentRepository`), which is an inefficient use of resources. This chapter introduces **composition**, a key principle of object-oriented programming that solves this problem by allowing objects to work together.
+
+-----
+
+### Building with Objects 🏗️
+
+Composition is the practice of building a new object by using other objects as its properties. Instead of each model knowing how to connect to the database, we can create a dedicated object whose single responsibility is to manage the connection.
+
+First, a new class called `DatabaseConnection` is created. This class has one job: to provide a single, reusable connection to the database. It contains a method, `getConnection()`, which handles the logic of creating the connection only once.
+
+```php
+class DatabaseConnection
+{
+    public function getConnection(): PDO
+    {
+        // ... returns connection, creating it if it doesn't exist
+    }
+}
+```
+
+### Delegating Responsibility 🤝
+
+Next, the `PostRepository` class is refactored. Instead of containing its own `dbConnect()` method and a `PDO` property, it now has a property of type `DatabaseConnection`. This means the repository **delegates** the responsibility of connecting to the new object.
+
+The repository's methods now simply ask the `DatabaseConnection` object for the active connection.
+
+```php
+// Old way
+$this->database->prepare(...)
+
+// New, composed way
+$this->connection->getConnection()->prepare(...)
+```
+
+This makes the code cleaner and more flexible. The controller can now create a single `DatabaseConnection` object and pass it to both the `PostRepository` and `CommentRepository` instances. As a result, both models share the exact same connection, solving the issue of multiple redundant connections and making the entire application more efficient.
+
+-----
+
+## Chapter 16 : Using Namespaces
+
+As applications grow and you begin to use code from multiple sources, you risk a common problem: **naming collisions**. This happens when two different classes in your project have the exact same name, which will cause your program to fail. To solve this, professional developers use a system called **namespaces**.
+
+-----
+
+### Virtual Folders for Your Code 📁
+
+A **namespace** acts like a virtual folder for your classes and functions. It allows you to have two classes with the same name, as long as they are organized into different namespaces. The structure of a namespace often mirrors the project's directory structure, such as `Application\Model\Post`.
+
+You declare a namespace at the top of a file using the `namespace` keyword. Once you do this, every class and function in that file belongs to that namespace, and its full name includes the namespace prefix.
+
+```php
+// In a file called PostRepository.php
+namespace Application\Model\Post;
+
+class PostRepository { /* ... */ }
+
+// The class's full name is now `Application\Model\Post\PostRepository`
+```
+
+-----
+
+### Avoiding Repetition ✍️
+
+Having to write the full, long namespace every time you use a class would be tedious. To avoid this, you can use the **`use`** keyword at the top of a file. The `use` statement works like a shortcut, allowing you to reference a class by its short name while still pointing to its full location.
+
+For example, a controller file can include the following line to easily access the repository class:
+
+```php
+use Application\Model\Post\PostRepository;
+
+// Now you can simply write this:
+$postRepository = new PostRepository();
+```
+
+Using namespaces is a best practice that prevents naming conflicts and makes your code more organized and readable, especially for large projects with many different components.
+
+-----
+
+## Chapter 17 : Practice Modify a Comment
+
+This chapter is a hands-on exercise designed to help you apply all the key principles you've learned so far. Your mission is to add a new feature to the blog: the ability for any user to modify any comment.
+
+---
+
+### Your Mission 🎯
+
+You'll need to create a new page where users can edit a comment, accessible via a "modify" link next to each comment. As you build this feature, you must respect all the professional practices covered in this course:
+
+* **Follow the MVC Pattern:** Separate your code into distinct Model, View, and Controller layers, ensuring each part has a single responsibility.
+* **Use Object-Oriented Programming:** The data must be handled using classes and objects, as you learned in the previous chapters.
+* **Organize with Namespaces:** Ensure all your new classes are placed within the proper namespaces.
+
+The focus of this exercise is purely on applying the correct code structure, so you don't need to worry about user permissions or security for this task. Once you're done, you can double-check your work to ensure your new feature is functional and correctly integrated into the application's structure.
+
+
+-----
+
+## Chapter 18 : Going Further
+
+This chapter serves as a conclusion, offering a look at what comes next and summarizing key professional practices. By building a website from scratch, you've gained a deep understanding of the problems that led developers to create modern tools and frameworks. Now you're ready to use them.
+
+***
+
+### Key Professional Practices 🧑‍💻
+
+* **Autoloading:** To stop manually including every file, you can use **autoloading**. This PHP feature automatically loads a class file whenever you use a class from a specific namespace. Here's a quick summary of what we did to implement it:
+    * **We organized our code** by following the **PSR-4** convention, which means we placed each class in its own file with the filename matching the class name and the folder structure matching the namespace.
+    * **We configured Composer** by adding the `autoload` section to our `composer.json` file, telling it to map the `Application\` namespace to the `src/` folder.
+    * **We ran a Composer command** (`composer dump-autoload`) to generate the `vendor/autoload.php` file.
+    * **We included that single file** in our `index.php` so all our classes could be found automatically without extra `require` statements.
+* **Documentation:** In professional projects, code is well-documented using a standard format like **PHPDoc**. This allows other developers to easily understand your code and allows tools to automatically generate clear documentation.
+* **Optimizing Wisely:** While clean code is important, avoid **premature optimization**—spending too much time making simple code perfect. The goal is to balance writing good code with delivering features. A good developer knows when to add small amounts of technical debt to move faster, then refactor the code later when it becomes necessary.
+* **Use a Framework:** The next step in your journey is to use a **framework**. Frameworks are large libraries that provide pre-built tools and code structures (like MVC) so you don't have to rebuild them yourself. They save you a lot of time and help you write cleaner code. Popular PHP frameworks include Symfony and Laravel.

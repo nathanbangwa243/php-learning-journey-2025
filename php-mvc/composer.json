@@ -1,0 +1,17 @@
+{
+    "name": "nathanbangwa243/php-mvc",
+    "description": "My PHP Learning Journey Project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Application\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nathanbangwa243",
+            "email": "nathanbangwa7@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,9 +1,11 @@
 <?php
-// index.php
 
-require_once('src/controllers/add_comment.php');
-require_once('src/controllers/homepage.php');
-require_once('src/controllers/post.php');
+require __DIR__ . '/vendor/autoload.php';
+
+use Application\Controllers\Comment\AddComment;
+use Application\Controllers\Comment\UpdateComment;
+use Application\Controllers\Homepage;
+use Application\Controllers\Post\Post;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -11,28 +13,39 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                post($identifier);
+                (new Post())->execute($identifier);
             } else {
-                throw new Exception('Erreur : aucun identifiant de billet envoyé');
-
-                die;
+                throw new Exception('Aucun identifiant de billet envoyé');
             }
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                addComment($identifier, $_POST);
+                (new AddComment())->execute($identifier, $_POST);
             } else {
-                throw new Exception('Erreur : aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        } elseif ($_GET['action'] === 'updateComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $identifier = $_GET['id'];
+                // It sets the input only when the HTTP method is POST (ie. the form is submitted).
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
 
-                die;
+                (new UpdateComment())->execute($identifier, $input);
+            } else {
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } else {
-            throw new Exception("Erreur 404 : la page que vous recherchez n'existe pas.");
+            throw new Exception("La page que vous recherchez n'existe pas.");
         }
     } else {
-        homepage();
+        (new Homepage())->execute();
     }
 } catch (Exception $e) {
-    echo '[ERROR] index.php :' . $e->getMessage();
+    $errorMessage = $e->getMessage();
+
+    require('templates/error.php');
 }
