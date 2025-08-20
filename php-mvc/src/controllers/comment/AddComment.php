@@ -1,8 +1,8 @@
 <?php
 
-namespace Application\Controllers\Comment\Add;
+namespace Application\Controllers\Comment;
 
-use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\DatabaseConnection\DatabaseConnection;
 use Application\Model\Comment\CommentRepository;
 
 class AddComment

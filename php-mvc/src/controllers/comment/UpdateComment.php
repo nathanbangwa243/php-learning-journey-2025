@@ -1,11 +1,9 @@
 <?php
 
-namespace Application\Controllers\Comment\Update;
+namespace Application\Controllers\Comment;
 
-require_once('src/lib/database.php');
-require_once('src/model/comment.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\DatabaseConnection\DatabaseConnection;
 use Application\Model\Comment\CommentRepository;
 
 class UpdateComment

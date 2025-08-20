@@ -25,6 +25,7 @@
 - [Chapter 15 : Leveraging Composition](#chapter-15--leveraging-composition)
 - [Chapter 16 : Using Namespaces](#chapter-16--using-namespaces)
 - [Chapter 17 : Practice Modify a Comment](#chapter-17--practice-modify-a-comment)
+- [Chapter 18 : Going Further](#chapter-18--going-further)
   
 ---
 
@@ -504,3 +505,23 @@ You'll need to create a new page where users can edit a comment, accessible via 
 * **Organize with Namespaces:** Ensure all your new classes are placed within the proper namespaces.
 
 The focus of this exercise is purely on applying the correct code structure, so you don't need to worry about user permissions or security for this task. Once you're done, you can double-check your work to ensure your new feature is functional and correctly integrated into the application's structure.
+
+
+-----
+
+## Chapter 18 : Going Further
+
+This chapter serves as a conclusion, offering a look at what comes next and summarizing key professional practices. By building a website from scratch, you've gained a deep understanding of the problems that led developers to create modern tools and frameworks. Now you're ready to use them.
+
+***
+
+### Key Professional Practices 🧑‍💻
+
+* **Autoloading:** To stop manually including every file, you can use **autoloading**. This PHP feature automatically loads a class file whenever you use a class from a specific namespace. Here's a quick summary of what we did to implement it:
+    * **We organized our code** by following the **PSR-4** convention, which means we placed each class in its own file with the filename matching the class name and the folder structure matching the namespace.
+    * **We configured Composer** by adding the `autoload` section to our `composer.json` file, telling it to map the `Application\` namespace to the `src/` folder.
+    * **We ran a Composer command** (`composer dump-autoload`) to generate the `vendor/autoload.php` file.
+    * **We included that single file** in our `index.php` so all our classes could be found automatically without extra `require` statements.
+* **Documentation:** In professional projects, code is well-documented using a standard format like **PHPDoc**. This allows other developers to easily understand your code and allows tools to automatically generate clear documentation.
+* **Optimizing Wisely:** While clean code is important, avoid **premature optimization**—spending too much time making simple code perfect. The goal is to balance writing good code with delivering features. A good developer knows when to add small amounts of technical debt to move faster, then refactor the code later when it becomes necessary.
+* **Use a Framework:** The next step in your journey is to use a **framework**. Frameworks are large libraries that provide pre-built tools and code structures (like MVC) so you don't have to rebuild them yourself. They save you a lot of time and help you write cleaner code. Popular PHP frameworks include Symfony and Laravel.

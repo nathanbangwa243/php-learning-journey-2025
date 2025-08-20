@@ -3,8 +3,8 @@
 namespace Application\Controllers\Post;
 
 use Application\Lib\DatabaseConnection\DatabaseConnection;
-use Application\Model\CommentRepository\CommentRepository;
-use Application\Model\PostRepository\PostRepository;
+use Application\Model\Comment\CommentRepository;
+use Application\Model\Post\PostRepository;
 
 class Post
 {
