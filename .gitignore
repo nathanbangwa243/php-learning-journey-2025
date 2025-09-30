@@ -26,5 +26,6 @@
 
 # IntelliJ stuff
 .idea/
+.idea/*
 
 /php-mvc/vendor/
